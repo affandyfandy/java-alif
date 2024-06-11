@@ -4,7 +4,7 @@ public class Assignment4 {
     public static void main(String[] args) {
         int[] numbers = {1, 2, 3, -6, 5, 4, 0};
         int[] subarrayIndex = findSubarrayIndex(numbers);
-        System.out.println("[" + subarrayIndex[0] + ", " + subarrayIndex[1] + "]"); // Output: [3, 6]
+        System.out.println("[" + subarrayIndex[0] + ", " + subarrayIndex[1] + "]"); // Output: [0, 3]
     }
 
     public static int[] findSubarrayIndex(int[] numbers) {
