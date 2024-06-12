@@ -1,10 +1,11 @@
 # Value Types and Reference Types
 
-### How OOP principles perform in java?
+## How OOP principles perform in java?
 
 Object-Oriented Programming (OOP) is a programming paradigm that uses classes and objects to structure software. There is four main principles of OOP, that is encapsulation, inheritance, polymorphism, and abstraction.
 
-#### Encapsulation
+#
+### Encapsulation
 
 Encapsulation is the mechanism of restricting direct access to some of an object’s attributes or methods and allowing modifications through specific method. Used to hide the internal state of the object and protect the object’s integrity.
 
@@ -12,6 +13,12 @@ Encapsulation is the mechanism of restricting direct access to some of an object
 public class Person {
     private String name;
     private int age;
+
+    // Constructor
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
 
     // Public setter for name
     public void setName(String name) {
@@ -32,12 +39,30 @@ public class Person {
     public int getAge() {
         return age;
     }
+
+    public void displayInfo() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+
+    public static void main(String[] args) {
+        Person patient = new Person("John", 20);
+        Doctor doctor = new Doctor();
+        doctor.treatPatient(patient); // Treating patient: Name: John, Age: 20
+    }
+}
+
+class Doctor {
+    public void treatPatient(Person patient) {
+        System.out.println("Treating patient: ");
+        patient.displayInfo();
+    }
 }
 ```
 
-The Person class encapsulates the name and age fields by making them private and provides public getter and setter methods to access and modify these fields.
+The Person class encapsulates the name and age fields by making them private and provides public getter and setter methods to access and modify these fields. The Doctor class has a treatPatient method, which takes a Person object as a parameter, and will take the method of Person class through patient as parameter.
 
-#### Inheritance
+#
+### Inheritance
 
 Inheritance allows a class to inherit the properties and methods of an existing class. It using the ‘extend’ keyword to inherit the class, also it promotes code reuse and establishes a hierarchy between classes.
 
@@ -46,6 +71,16 @@ Inheritance allows a class to inherit the properties and methods of an existing 
 public class Animal {
     public void sound() {
         System.out.println("Animal sound");
+    }
+
+    public void eat() {
+        System.out.println("Animal is eating.");
+    }
+
+    public static void main(String[] args) {
+        Dog myDog = new Dog();
+        DogOwner dogOwner = new DogOwner();
+        dogOwner.feedAnimal(myDog); // Animal is eating.
     }
 }
 
@@ -62,24 +97,41 @@ class Dog extends Animal {
         System.out.println("Fetch");
     }
 }
+
+class DogOwner {
+    public void feedAnimal(Dog dog){
+        dog.eat();
+    }
+}
 ```
 
-The Dog class inherits from the Animal class, so it can override or use the sound() method defined in Animal class, also the Dog class can make other method.
+The Dog class inherits from the Animal class, so it can override or use the sound() method defined in Animal class, also the Dog class can make other method. The ZooKeeper class has a feedAnimal method, which takes an Animal object as a parameter and use the parent's method.
 
-#### Polymorphism
+#
+### Polymorphism
 
 Polymorphism allows objects of different classes to be treated as objects of a superclass.
 
 ```java
 public static void main(String[] args) {
-    Animal dog = new Dog();
-    dog.sound(); // Output: Animal Sound Dog sound
+    Dog myDog = new Dog();
+
+    AnimalShelter animalShelter = new AnimalShelter();
+    animalShelter.adopt(myDog); // You adopted an animal that says: Animal sound Dog sound
+}
+
+class AnimalShelter {
+    public void adopt(Animal animal) {
+        System.out.print("You adopted an animal that says: ");
+        animal.sound();
+    }
 }
 ```
 
-The Dog class override the sound() method from Animal class. The dog variable declared as an Animal class, and creates a new instance of the Dog class.
+The Dog class override the sound() method from Animal class. The dog variable declared as an Animal class, and creates a new instance of the Dog class. The AnimalShelter class has an adopt method that takes an Animal object as a parameter and calls its sound method.
 
-#### Abstraction
+#
+### Abstraction
 
 Abstraction hiding the complex implementation details and showing only the necessary thing of an object.
 
@@ -96,6 +148,14 @@ public abstract class Employee {
     }
 
     public abstract void work();
+
+    
+    public static void main(String[] args) {
+        Company company = new Company();
+        Employee manager = new Manager("John");
+
+        company.assignTask(manager);    // Outputs: Task assigned to: Manager John is managing
+    }
 }
 
 class Manager extends Employee {
@@ -108,6 +168,13 @@ class Manager extends Employee {
         System.out.println("Manager " + super.getName() + " is managing");
     }
 }
+
+class Company {
+    public void assignTask(Employee employee) {
+        System.out.println("Task assigned to:");
+        employee.work();
+    }
+}
 ```
 
-The Employee class is an abstract class that has work abstract method. The Manager class extends Employee class and must implement the work method.
+The Employee class is an abstract class that has work abstract method. The Manager class extends Employee class and must implement the work method. The Company class has an assignTask method that takes an Employee object as a parameter and calls its work abstract method.
