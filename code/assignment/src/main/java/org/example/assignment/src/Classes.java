@@ -1,6 +1,6 @@
 package org.example.assignment.src;
 
-public class MyClass {
+public class Classes {
     public static void main(String[] args) {
         MyObject myObj = new MyObject(10);
         System.out.println("Before reassignment: " + myObj.value); // Outputs: 10
