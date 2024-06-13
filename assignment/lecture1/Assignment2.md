@@ -178,3 +178,34 @@ class Company {
 ```
 
 The Employee class is an abstract class that has work abstract method. The Manager class extends Employee class and must implement the work method. The Company class has an assignTask method that takes an Employee object as a parameter and calls its work abstract method.
+
+#
+## Passing an object into function, and then assign that object to new one
+
+If assign the passed object reference to a new object in the parameters function, the reference inside the function will point to the new object, but this change will not affect the original reference outside the function.
+
+```java
+public class MyClass {
+    public static void main(String[] args) {
+        MyObject myObj = new MyObject(10);
+        System.out.println("Before reassignment: " + myObj.value); // Outputs: 10
+
+        reassignObject(myObj);
+        System.out.println("After reassignment: " + myObj.value); // Still, outputs: 10
+    }
+    
+    public static void reassignObject(MyObject obj) {
+        obj = new MyObject(30); // Reassigning to a new object
+    }
+}
+
+class MyObject {
+    int value;
+
+    MyObject(int value) {
+        this.value = value;
+    }
+}
+```
+
+The reassignObject function assigns obj to a new MyObject with a value of 30. However, this reassignment only affects the local copy of the reference inside the function. The original reference myObj in the main method still points to the original object with a value of 10.
