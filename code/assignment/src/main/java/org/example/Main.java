@@ -1,17 +1,29 @@
 package org.example;
 
-import org.example.assignment.src.*;
-
-
 public class Main {
     public static void main(String[] args) {
-        // Get instance of the Singleton
-        Singleton instance1 = Singleton.getInstance();
+        MyClass obj = new MyClass();
+        obj.value = 5;
+        obj.attr = "World";
 
-        // Get another instance of the Singleton
-        Singleton instance2 = Singleton.getInstance();
-
-        // Check if both instances are the same
-        System.out.println("Are instances the same? " + (instance1 == instance2));
+        changeReference(obj);
+        System.out.println("obj.value after changeReference: " + obj.value + ", " + obj.attr);
+        // Output: obj.value after changeReference: 5, World
     }
+
+    public static void changeReference(MyClass x) {
+        x = new MyClass();
+        x.value = 10;
+        x.attr = "Hello";
+    }
+
+    public static void modifyObject(MyClass x) {
+        x.value = 10;
+        x.attr = "Hello";
+    }
+}
+
+class MyClass {
+    int value;
+    String attr;
 }
