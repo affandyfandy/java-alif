@@ -12,23 +12,26 @@ public class Assignment3 {
     public static ArrayList<Integer> findSecondLargestIndex(ArrayList<Integer> numbers) {
         int largest = numbers.get(0);
         int secondLargest = numbers.get(0);
+        int temp = 0;
 
         ArrayList<Integer> secondLargestIndexes = new ArrayList<>();
 
-        for (int number : numbers) {
+        for (int i = 0; i < numbers.size(); i++) {
+            
+            int number = numbers.get(i);
             if (number > largest) {
                 secondLargest = largest;
                 largest = number;
-            } else if (number > secondLargest) {
-                secondLargest = number;
+                temp = numbers.indexOf(secondLargest);
+                secondLargestIndexes.clear();
             }
-        }
 
-        for (int i = 0; i < numbers.size(); i++) {
-            if (numbers.get(i) == secondLargest) {
+            if (number == secondLargest) {
                 secondLargestIndexes.add(i);
             }
         }
+
+        secondLargestIndexes.add(0,temp);
 
         return secondLargestIndexes;
     }

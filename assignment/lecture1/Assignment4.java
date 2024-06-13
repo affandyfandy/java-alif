@@ -1,5 +1,3 @@
-package org.example.assignment;
-
 public class Assignment4 {
     public static void main(String[] args) {
         int[] numbers = {1, 2, 3, -6, 5, 4, 0};
@@ -9,16 +7,22 @@ public class Assignment4 {
 
     public static int[] findSubarrayIndex(int[] numbers) {
         int[] subarrayIndex = new int[2];
+        int current = 0;
         int sum = 0;
+
         for (int i = 0; i < numbers.length; i++) {
-            sum = 0;
-            for (int j = i; j < numbers.length; j++) {
-                sum += numbers[j];
-                if (sum == 0) {
-                    subarrayIndex[0] = i;
-                    subarrayIndex[1] = j;
-                    return subarrayIndex;
-                }
+            sum += numbers[i];
+
+            if (sum == 0) {
+                subarrayIndex[0] = current;
+                subarrayIndex[1] = i;
+                return subarrayIndex;
+            }
+
+            if (i == numbers.length - 1 && sum != 0) {
+                i = current;
+                current++;
+                sum = 0;
             }
         }
         return subarrayIndex;
