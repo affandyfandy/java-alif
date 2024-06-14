@@ -1,3 +1,7 @@
+# Singleton
+
+Singleton is a design pattern that ensures a class has only one instance and provides a global point of access to that instance.
+
 # Thead-safe singleton
 
 Thread safety refers to ensures it behaves correctly during simultaneous execution by multiple threads. In Java, when multiple threads access a shared resource concurrently, without proper synchronization or control mechanisms, it can lead to race conditions, where the outcome depends on the timing of execution of threads. Race conditions is when two or more threads can access shared data and they try to change it at the same time.
