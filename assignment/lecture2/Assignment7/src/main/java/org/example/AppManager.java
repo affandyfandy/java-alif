@@ -51,6 +51,9 @@ public class AppManager {
                 case 4:
                     exportFilteredEmployees(scanner);
                     break;
+                case 5:
+                    printAllEmployees();
+                    break;
                 default:
                     System.out.println("Invalid choice, please try again.");
             }
@@ -114,13 +117,23 @@ public class AppManager {
     private void filterEmployees(Scanner scanner) {
         System.out.print("Enter filter criteria (name, id, date of birth (yyyy), department): ");
         String filterCriteria = scanner.nextLine();
+        boolean isNumeric = filterCriteria.chars().allMatch(Character::isDigit);
 
         List<Employee> filteredEmployees = new ArrayList<>();
         for (Employee emp : employees) {
-            if (emp.getName().contains(filterCriteria) ||
+            boolean matches = emp.getName().contains(filterCriteria) ||
                     emp.getId().contains(filterCriteria) ||
-                    emp.getDateOfBirth().getYear() == Integer.parseInt(filterCriteria) ||
-                    emp.getDepartment().equals(filterCriteria)) {
+                    emp.getDepartment().equals(filterCriteria);
+
+            if (isNumeric) {
+                try {
+                    int year = Integer.parseInt(filterCriteria);
+                    matches = matches || emp.getDateOfBirth().getYear() == year;
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input: " + filterCriteria);
+                }
+            }
+            if (matches) {
                 filteredEmployees.add(emp);
             }
         }
@@ -133,7 +146,8 @@ public class AppManager {
 
     private void exportFilteredEmployees(Scanner scanner) {
         System.out.print("Enter the path to save the csv file: ");
-        String csvFilePath = scanner.nextLine();
+//        String csvFilePath = scanner.nextLine();
+        String csvFilePath = "src/main/java/org/example/file/ExportData.csv";
 
         employees.sort((e1, e2) -> e1.getDateOfBirth().compareTo(e2.getDateOfBirth()));
 

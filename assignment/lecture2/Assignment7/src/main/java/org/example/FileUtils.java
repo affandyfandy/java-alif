@@ -33,7 +33,11 @@ public class FileUtils {
     }
 
     public static void writeCsv(String filePath, List<String[]> data) throws IOException {
-        try (CSVWriter writer = new CSVWriter(new FileWriter(filePath))) {
+        try (CSVWriter writer = new CSVWriter(new FileWriter(filePath),
+                CSVWriter.DEFAULT_SEPARATOR,
+                CSVWriter.NO_QUOTE_CHARACTER,
+                CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                CSVWriter.DEFAULT_LINE_END)) {
             writer.writeAll(data);
         }
     }
