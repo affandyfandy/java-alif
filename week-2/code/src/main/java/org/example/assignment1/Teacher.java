@@ -56,10 +56,10 @@ public class Teacher {
 
     public static void main(String[] args) {
         Subject math = new Subject("Mathematics");
-        math.setClassId("Math-101");
+        math.setClassId("1");
 
         Teacher teacher = new Teacher("Tam", 30);
         teacher.setSubject(math);
-        teacher.teach(); // Tam is teaching Mathematics for Class null
+        teacher.teach(); // Teacher Tam is teaching Mathematics for Class null
     }
 }

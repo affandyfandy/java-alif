@@ -5,9 +5,9 @@ import java.util.List;
 public class Student {
     private String name;
     private int age;
-    private List<Subject> subjects;
+    private Subject[] subjects;
 
-    public Student(String name, int age, List<Subject> subjects) {
+    public Student(String name, int age, Subject[] subjects) {
         this.name = name;
         this.age = age;
         this.subjects = subjects;
@@ -38,11 +38,11 @@ public class Student {
         this.age = age;
     }
 
-    public List<Subject> getSubjects() {
+    public Subject[] getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(List<Subject> subjects) {
+    public void setSubjects(Subject[] subjects) {
         this.subjects = subjects;
     }
 
@@ -52,7 +52,7 @@ public class Student {
         Subject science = new Subject("Science");
         science.setClassId("Science-101");
 
-        List<Subject> subjects = List.of(math, science);
+        Subject[] subjects = {math, science};
 
         Student student = new Student("Alice", 15, subjects);
         student.learn();
