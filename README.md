@@ -1,6 +1,12 @@
 # Overview - Internship
 
 #
+## Week 2
+
+- [Assignment 1](week-2/Assignment1.md) / [Code Assignment 1](week-2/code/src/main/java/org/example/assignment1/)
+- [Assignment 2](week-2/Assignment2.md) / [Code Assignment 2](week-2/code/src/main/java/org/example/assignment2/)
+
+#
 ## Week 1
 
 ### Assignments for Lecture 2: Java Core.

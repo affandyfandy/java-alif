@@ -113,3 +113,5 @@ In the main method, an instance of MyFunctionalInterface is created using a lamb
 - [Account Interface](code/src/main/java/org/example/assignment2/Account.java)
 - [SavingAccount Class](code/src/main/java/org/example/assignment2/SavingAccount.java)
 - [CurrentAccount Class](code/src/main/java/org/example/assignment2/CurrentAccount.java)
+
+*main method in ATMImpl Class
