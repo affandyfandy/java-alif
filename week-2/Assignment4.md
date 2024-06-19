@@ -235,3 +235,39 @@ public static void main(String[] args) {
 
 The main method creates an array of integers and a `MultiThreadSort` object to sort the array. It then creates a thread with the `MultiThreadSort` object and starts the thread. After the sorting is done, it prints the sorted array.
 
+#
+## What are noticeable things when using multiple thread?
+
+When using multiple threads in Java, there are several noticeable things about that, that is:
+
+- `Resource Sharing`: Shared resources to be accessed concurrently.
+- `Concurrency`: Concurrency issues including race conditions, where multiple threads access and modify shared resources concurrently. This things can make an unpredictable results, that is deadlocks, where threads wait each other for the resources, and livelocks, where threads continuously change their states to each other without making progress.
+- `Synchronization`: Using synchronization mechanisms in program can introduce overhead reducing the benefits of parallelism.
+- `Thread Management`: Creating and destroying threads have cost to do that, that may cause to performance overhead. Using thread pooling to manage threads efficiently.
+- `Thread Safety`: Ensuring the methods or blocks of code can be safely executed by multiple threads.
+
+#
+## Illustrate the usage of the ReadWriteLock interface for concurrent read-write access to a shared resource.
+
+[Code - ReadWriteLock](code/src/main/java/org/example/assignment4/ReadWriteLock.java)
+
+ReadWriteLock interface provides two locks (readLock and writeLock) to control access to a shared resource in a concurrent environment.
+
+`Read Lock`: allows multiple threads to read simultaneously.
+`Write Lock`: allows only one thread to write at a time and blocks other readers and writers.
+
+**Implementation in the code**
+
+SharedResource Class:
+- `value`: the shared resource that can be accessed by multiple threads.
+- `lock`: an instance of `ReentrantReadWriteLock` to manage read and write of the locks.
+- `read()`: a method to acquires the read lock, this method will reads the value, and then releases the read lock.
+- `write(int newValue)`: a method to acquires the write lock, writes the new value from its parameter, and then releases the write lock.
+
+ReadWriteLockExample Class:
+- `resource`: create an instance of `SharedResource` class.
+- `executor`: uses an `ExecutorService` to manage a fixed thread pool.
+- `readers`: creating multiple reader tasks to the executor, each reader task reads the value multiple times to simulate read operations.
+- `writers`: creating multiple writer tasks to the executor, each writer task writes new values multiple times to simulate write operations.
+
+By using `ReadWriteLock`, the program ensures that read and write operations on the shared resource are performed safely in a concurrent environment
