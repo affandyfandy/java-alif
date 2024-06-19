@@ -1,6 +1,10 @@
 # Assignment 4
 
-## Q: Explain about Deadlock and give example? How to prevent
+[<ins>`Assignment 4 Code`</ins>](code/src/main/java/org/example/assignment4/)
+
+## 4.1 Q: Explain about Deadlock and give example? How to prevent
+
+[<ins>`Code - 4.1 Deadlock`</ins>](code/src/main/java/org/example/assignment4/Deadlock.java)
 
 Deadlock is a situation in concurrent programming where two or more threads are waiting each other to release a resource, makes the treads are blocked forever. Also when a thread is waiting for an object lock that is acquired by another thread, and the other thread is waiting for an object lock that is acquired by the first thread. When the threads are waiting for each other to release the lock or resource forever, this condition is called deadlock.
 
@@ -57,6 +61,8 @@ public class Deadlock {
 ```
 
 In this `Deadlock` class, there are two threads are created to acquire locks on two resources in different orders. If both threads start at the same time, they may acquire one resource and then wait for other resource to become available. This results in a deadlock where neither thread can proceed.
+
+[<ins>`Code - 4.1 Deadlock Prevent`</ins>](code/src/main/java/org/example/assignment4/DeadlockPrevent.java)
 
 Preventing deadlock in multi-threaded programming by:
 - **Avoid cyclic dependency**: Avoid the need for acquiring multiple locks for a thread, if a thread need multiple locks, ensure that each thread acquires the locks in the same order.
@@ -124,9 +130,9 @@ public class DeadlockPrevent {
 In the `DeadlockPrevent` class, there are two threads (`thread1` and `thread2`) to synchronization using the resources `resource1` and `resource2`. Each thread attempts to acquire locks on these resources in the same order, first `resource1` and then `resource2`. This approach prevents deadlock by ensuring that both threads follow a consistent lock acquisition sequence. If `thread1` acquires `resource1` first, it will wait for `resource2` only after it has released `resource1`. Similarly, `thread2` will acquire `resource1` first and then `resource2`, avoiding a deadlock scenario where one thread holds a lock and waits indefinitely for a resource held by another thread.
 
 #
-## Creates a bank account with concurrent deposits and withdrawals using threads.
+## 4.2 Creates a bank account with concurrent deposits and withdrawals using threads.
 
-[Code - Bank Account](code/src/main/java/org/example/assignment4/BankAccount.java)
+[<ins>`Code - 4.2 Bank Account`</ins>](code/src/main/java/org/example/assignment4/BankAccount.java)
 
 Implementation:
 ```java
@@ -200,9 +206,9 @@ Deposited 100, balance: 100.0
 When we run the program, the deposit and withdraw operations are performed `concurrently` by the two threads. Since the deposit and withdraw methods are `synchronized`, only one thread can execute these methods at a time, preventing multiple threads from accessing the account balance simultaneously and ensuring that the account balance is updated correctly.
 
 #
-## Write a Java program that sorts an array of integers using multiple threads.
+## 4.3 Write a Java program that sorts an array of integers using multiple threads.
 
-[Code - Multiple Threads Sort](code/src/main/java/org/example/assignment4/MultiThreadSort.java)
+[<ins>`Code - 4.3 Multiple Threads Sort`</ins>](code/src/main/java/org/example/assignment4/MultiThreadSort.java)
 
 The MultiThreadSort class is class for sorts an array of integers using merge sort algorithm.
 
@@ -236,7 +242,7 @@ public static void main(String[] args) {
 The main method creates an array of integers and a `MultiThreadSort` object to sort the array. It then creates a thread with the `MultiThreadSort` object and starts the thread. After the sorting is done, it prints the sorted array.
 
 #
-## What are noticeable things when using multiple thread?
+## 4.4 What are noticeable things when using multiple thread?
 
 When using multiple threads in Java, there are several noticeable things about that, that is:
 
@@ -247,9 +253,9 @@ When using multiple threads in Java, there are several noticeable things about t
 - `Thread Safety`: Ensuring the methods or blocks of code can be safely executed by multiple threads.
 
 #
-## Illustrate the usage of the ReadWriteLock interface for concurrent read-write access to a shared resource.
+## 4.5 Illustrate the usage of the ReadWriteLock interface for concurrent read-write access to a shared resource.
 
-[Code - ReadWriteLock](code/src/main/java/org/example/assignment4/ReadWriteLock.java)
+[<ins>`Code - 4.5 ReadWriteLock`</ins>](code/src/main/java/org/example/assignment4/ReadWriteLock.java)
 
 ReadWriteLock interface provides two locks (readLock and writeLock) to control access to a shared resource in a concurrent environment.
 

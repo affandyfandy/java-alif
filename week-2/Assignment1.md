@@ -1,7 +1,10 @@
 # Assignment 1
-[Code and Java File - Assignment 1](code/src/main/java/org/example/assignment1/)
+[<ins>`Assignment 1 Code`</ins>](code/src/main/java/org/example/assignment1/)
 
-## LAB 1
+## 1.1 LAB 1
+
+[<ins>`Code - 1.1 Dog Class`</ins>](code/src/main/java/org/example/assignment1/Dog.java)
+
 A dog has:
 - States - color, name, breed
 - Behaviors - wagging the tail, barking, eating
@@ -35,7 +38,11 @@ public class Dog {
 ```
 
 #
-## LAB 2
+## 1.2 LAB 2
+
+[<ins>`Code - 1.2 Teacher Class`</ins>](code/src/main/java/org/example/assignment1/Teacher.java)
+[<ins>`Code - 1.2 Subject Class`</ins>](code/src/main/java/org/example/assignment1/Subject.java)
+
 
 **Teacher Class**
 - Teacher with state is name, age, subject and the behavior is teaching
@@ -106,8 +113,15 @@ public class Subject {
     ... // getter and setter
 }
 ```
+
 #
-## LAB 3
+## 1.3 LAB 3
+
+[<ins>`Code - 1.3 Student Class`</ins>](code/src/main/java/org/example/assignment1/Student.java)
+
+[<ins>`Code - 1.3 Teacher Class`</ins>](code/src/main/java/org/example/assignment1/Teacher.java)
+
+
 
 **Student class**
 - Student with name, age, and behavior is learning

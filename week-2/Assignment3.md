@@ -1,7 +1,9 @@
 # Assignment 3
 
+[<ins>`Assignment 3 Code`</ins>](code/src/main/java/org/example/assignment3)
+
 #
-## Q1 : Research and explain try-with-resources ?
+## 3.1 Q1 : Research and explain try-with-resources ?
 
 The `try-with-resources` is a try statement that declares one or more resources. In this context, a resource is an object that must be closed after the program that use the resource is finished, the object implement `AutoCloseable` interface. The `try-with-resource` ensures that each resource is closed at the end of the statement.
 
@@ -18,7 +20,10 @@ try (Scanner scanner = new Scanner(new File("sample.txt"))) {
 The `try-with-resources` read a file named "sample.txt" each line using Scanner class. Inside the try block, creates a Scanner object to read the line and print it to the console. As long as the scanner has more lines to read, it will prints each line to the console. The `try-with-resources` statement ensures that the Scanner is automatically closed when the try block is finished even there is exception appears.
 
 #
-## Q2: Throw vs throws, give example
+## 3.2 Q2: Throw vs throws, give example
+
+[<ins>`Code - 3.2 Throw vs throws`</ins>](code/src/main/java/org/example/assignment3/ThrowAndThrows.java)
+
 
 The `throw` and `throws` is the concept of exception handling, where the `throw` keyword is used to explicitly trigger an exception from a method or a block of code, while the `throws` keyword is included in a method's signature to indicate that it may throw an exception.
 
@@ -73,9 +78,13 @@ public class ThrowAndThrows {
 The `divideNum` method is declared with `throws Arithmetic` that indicate it can throw this exception if an error occures, such as dividing by zero. When `divideNum` is called in the main method with `10` and `0`, it results an `ArithmeticException`. This exception is caught in the `try catch` block.
 
 #
-## Lab 1 (try to use try-with-resources)
+## 3.3 Lab 1 (try to use try-with-resources)
 
-`test1.txt`:
+[<ins>`Code - 3.3 Lab 1`</ins>](code/src/main/java/org/example/assignment3/FileReadWrite.java)
+
+
+[`test1.txt`](code/src/main/java/org/example/assignment3/lab1/test1.txt)
+:
 ```
 Hello, some text here
 ```
@@ -131,7 +140,10 @@ public class FileReadWrite {
 The `readWriteFile` method reads from test1.txt using a `BufferedReader` within a `try-with-resources` block, ensuring the reader is closed automatically. It stores the file content in a StringBuilder and prints it to the console. Then, it writes this content to test2.txt using a  `try-with-resources` block that use `BufferedWriter` resource to write the contect to the text2.txt. If any IOException occurs during reading or writing, it catches and prints the stack trace. The main method calls readWriteFile to execute this process.
 
 #
-## Lab 2
+## 3.4 Lab 2
+
+[<ins>`Code - 3.4 Lab 2`</ins>](code/src/main/java/org/example/assignment3/Lab2Exception.java)
+
 
 Lab2Exception:
 ```java
@@ -194,7 +206,10 @@ class Menu {
 In this Menu class, the program implements a simple menu system where users can input a number corresponding to menu options A to E. If the user's input is out of range (1-5), a `Lab2Exception` is thrown with an error message and doesn't crash the application. This example demonstrates error handling with custom exceptions and general exceptions.
 
 #
-## Lab 3
+## 3.5 Lab 3
+
+[<ins>`Code - 3.5 Lab 3`</ins>](code/src/main/java/org/example/assignment3/VowelException.java)
+
 
 Vowel Exception:
 ```java
