@@ -215,3 +215,148 @@ Map<Integer, Employee> employeeMap = employees.stream()
 104 -> Employee{employeeID=104, name='Eve'}
 105 -> Employee{employeeID=105, name='David'}
 ```
+
+#
+## 5.6 Demo CopyOnWriteArrayList when modify item
+
+[<ins>`Code - 5.6 CopyOnWriteArrayList`</ins>](code/src/main/java/org/example/assignment5/CopyOnWriteArrayListLab.java)
+
+The `CopyOnWriteArrayList` is a thread-safe variant of `ArrayList`. Making a fresh copy of the underlying array for every write operation (add, set, remove). The read operations do not require locks and can proceed concurrently with write operations without being affected by them.
+
+**Summary Implementation**:
+
+```java
+// Create a CopyOnWriteArrayList and add some elements
+CopyOnWriteArrayList<String> list = new CopyOnWriteArrayList<>();
+list.add("A");
+list.add("B");
+list.add("C");
+```
+
+In initial setup, a `CopyOnWriteArrayList` named `list` is created and populated with elements `"A"`, `"B"`, and `"C"`.
+
+```java
+// Thread to modify the list
+Thread writerThread = new Thread(() -> {
+    list.set(1, "X"); // Modify element at index 1
+    list.add("D");    // Add a new element
+    System.out.println("Writer thread updated list: " + list);
+}, "Writer Thread");
+```
+
+A `writer thread` is created that modifies the list by changing the element at index `1` to `"x"`, and then adding a new element `"D"`.
+
+```java
+// Thread to iterate over the list
+Thread readerThread = new Thread(() -> {
+    // Iterate over the list
+    for (String s : list) {
+        System.out.println("Reader thread reads: " + s);
+        try {
+            Thread.sleep(50); // Sleep to simulate some work
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+}, "Reader Thread");
+```
+
+A `reader thread` is created that iterates over the list and prints for each element, the `sleeps` is for simulate of some work.
+
+```java
+// Start both threads
+writerThread.start();
+readerThread.start();
+```
+
+Both `threads` are started concurrently.
+
+```java
+System.out.println("Final list: " + list); // Output: Final list: [A, X, C, D]
+```
+
+The final list is printed.
+
+`Output`:
+```
+Initial list: [A, B, C]
+Final list: [A, X, C, D]
+Writer thread updated list: [A, X, C, D]
+Reader thread reads: A
+Reader thread reads: X
+Reader thread reads: C
+Reader thread reads: D
+```
+
+**Points**:
+The `CopyOnWriteArrayList` ensures that the `reader thread` has consistent view of the list even while the `writer thread` is modifying it (Thread Safety). The `reader thread` working with the original list, while the `writer thread` working with a modified copy of the list.
+
+#
+## 5.7 Demo ConcurrencyHashMap
+
+[<ins>`Code - 5.7 ConcurrencyHashMap`</ins>](code/src/main/java/org/example/assignment5/ConcurrencyHashMap.java)
+
+The `ConcurrentHashMap` is a thread-safe variant of `HashMap` that is designed for concurrent access. `ConcurrentHashMap` uses a finer-grained locking mechanism to allow higher concurrency for each operation.
+
+**Summary Implementation**:
+
+```java
+// Create a ConcurrentHashMap
+ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>();
+map.put("A", 1); // Add some elements
+map.put("B", 2);
+map.put("C", 3);
+map.put("D", 4);
+```
+
+Create a `ConcurrentHashMap` named `map` and populate with key-value pairs: ("A", 1), ("B", 2), ("C", 3), and ("D", 4).
+
+```java
+// Thread to modify the map
+Thread writerThread = new Thread(() -> {
+    map.put("B", 35); // Modify an existing element, B -> 35
+    map.put("E", 5);  // Add a new element, E -> 5
+    System.out.println("Updated map: " + map);
+}, "Writer Thread");
+```
+
+Create a `writer thread` that modifies the map. Updating the value of `"B"` key to `35`. Add a new key-value `("D", 4)`
+
+```java
+// Thread to read from the map
+Thread readerThread = new Thread(() -> {
+    // Iterate over the map entries
+    map.forEach((key, value) -> {
+        System.out.println("Map reads: " + key + " -> " + value);
+        try {
+            Thread.sleep(50); // Sleep to simulate some work
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    });
+}, "Reader Thread");
+```
+
+Create a `reader thread` that read the map by iterates over the entries and prints each key-value pair.
+
+```java
+// Start both threads
+writerThread.start();
+readerThread.start();
+```
+Start both tread concurrently
+
+`Output`:
+```
+Initial map: {A=1, B=2, C=3, D=4}
+Final map: {A=1, B=35, C=3, D=4, E=5}
+Updated map: {A=1, B=35, C=3, D=4, E=5}
+Map reads: A -> 1
+Map reads: B -> 35
+Map reads: C -> 3
+Map reads: D -> 4
+Map reads: E -> 5
+```
+
+**Points**:
+The `ConcurrentHashMap` allow safe concurrent read and write operations without declaring synchronzation explicitly.

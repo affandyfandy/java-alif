@@ -46,12 +46,3 @@ class Main {
         withdrawThread.start(); // Start withdraw thread
     }
 }
-
-// Explanation
-// In this program, we have a BankAccount class that represents a bank account. The class has two synchronized methods: deposit and withdraw. The deposit method increases the account balance by the specified amount, while the withdraw method decreases the account balance by the specified amount if the balance is sufficient. If the balance is insufficient, a message is printed indicating that there is insufficient balance.
-
-// In the Main class, we create an instance of the BankAccount class and two threads: depositThread and withdrawThread. The depositThread calls the deposit method to deposit 100 units of money into the account, while the withdrawThread calls the withdraw method to withdraw 100 units of money from the account.
-
-// When we run the program, the deposit and withdraw operations are performed concurrently by the two threads. Since the deposit and withdraw methods are synchronized, only one thread can execute these methods at a time, preventing
-
-// multiple threads from accessing the account balance simultaneously and ensuring that the account balance is updated correctly.
