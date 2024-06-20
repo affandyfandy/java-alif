@@ -195,9 +195,10 @@ Covert a `List` of `Employee` objects into a `Map` where the `employeeID` as a k
 1. **List creation**: Create a `List<Employee>` containing instances of the `Employee` class with various values
 
 2. **Conversion**: Using Java streams with the explanation:
+- Convert `List<Employee>` to `Map<Integer, Employee>` ordered by employeeID in asc way by key
 - `.stream()` converts the list into a stream
 - `.collect(Collectors.toMap(...))` collects elements of the stream into a Map
-- `Employee::getEmployeeID` is used as the key mapper to extract `employeeID`.
+- `Employee::getEmployeeID` is used as the key mapper to extract `employeeID` and order it.
 - `emp -> emp` is used as the value mapper to map each Employee object directly to itself.
 
 ```java
@@ -360,3 +361,301 @@ Map reads: E -> 5
 
 **Points**:
 The `ConcurrentHashMap` allow safe concurrent read and write operations without declaring synchronzation explicitly.
+
+#
+## 5.8 Explain equal() and hashCode() method
+
+**Definition**
+
+The `equals()` and `hashCode()` are methods for working with collections like `HashMap`, `HashSet`, and others.
+
+The **`equals()`** method is used to determina if two objects are considered equal. Example:
+
+```java
+public class Person {
+    private int id;      // Unique identifier
+    private String name; // Name
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true; // Check if the compared objects are the same instance
+
+        if (o == null || getClass() != o.getClass()) return false; // Check if the compared object is null or not of the same class
+        
+        Person person = (Person) o; // Cast the object to Person
+
+        // Check if both id and name are equal for both objects
+        return id == person.id && Objects.equals(name, person.name); 
+    }
+}
+```
+
+The **`hashCode()`** method returns an integer hash code value for the object. This method is used in hashing-based collections like `HashMap`, `HashSet`, and `Hashtable`.
+
+```java
+public class Person {
+    private int id;      // Unique identifier
+    private String name; // Name
+
+    @Override
+    public boolean equals(Object o) {
+        ...
+    }
+
+    @Override
+    public int hashCode() {
+        // Generate a hash code using name and id
+        return Objects.hash(name, id);
+    }
+}
+```
+
+The relationship between `equals()` and `hashCode()` are if `equals()` is overridden, then the `hashCode()` must also be overriden to maintain the contract, which states that equal objects must have equal `hash codes`. If two objects are equal according to the `equals()` method, both must have the same hash code. And if two object have the same hash code, it's not necessarily equal.
+
+**Comparation**:
+
+| Criteria | equals() | hashCode() |
+| --- | --- | --- |
+| **Purpose** | To chech logical equality of two objects, but not their reference equality that is `==` | To provide an integer representation of the object in `hashing` |
+| **Default Implementation** | Compare memory address, two references are equal only if they point to the same references | Provide distinct integers for different objects |
+| **Override** | To compare the contents of objects | Ensure that equal objects have the same hash code |
+
+#
+## 5.9 See assignment 5.5, add employee to HashSet. How can it recognize that 2 employee has duplicated employee ID? Implement it
+
+[<ins>`Code - 5.9 HashSet Employee`</ins>](code/src/main/java/org/example/assignment5/HashSetEmployee.java)
+
+To recognize duplicate employee ID when adding `Employee` objects to a `HashSet`, override the `equals()` and `hashCode()` methods in the model, that is `Employee` class. This ensures that two `Employee` objects with the same `employeeID` are equal.
+
+**Implementation**:
+
+```java
+List<Employee> employees = Arrays.asList(
+    new Employee(101, "John"),
+    new Employee(103, "Michael"),
+    new Employee(102, "Charlie"),
+    new Employee(105, "David"),
+    new Employee(104, "Eve"),
+    new Employee(103, "Michael Duplicate") // Duplicate employeeID
+);
+```
+First, add a duplicate employee to the list as a demonstration, ensurint there is no duplicated employee ID.
+
+```java
+@Override
+public boolean equals(Object o) {
+    if (this == o) return true; // Check if the compared objects are the same instance
+    if (o == null || getClass() != o.getClass()) return false; // Check if the compared object is null or not of the same class
+    Employee employee = (Employee) o; // Cast the object to Employee
+    return employeeID == employee.employeeID; // Check if the employee IDs are equal
+}
+
+@Override
+public int hashCode() {
+    return Objects.hash(employeeID); // Generate a hash code using employeeID
+}
+```
+
+Overriding `equals()` and `hashCode()` ensures that two `Employee` objects with the same `employeeID` are equal. The `equals()` method compares the `employeeID` field, and the `hashCode()` method generates a hash code based on `employeeID`.
+
+```java
+class Employee {
+    ... // Other code
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true; // Check if the compared objects are the same instance
+        if (o == null || getClass() != o.getClass()) return false; // Check if the compared object is null or not of the same class
+        Employee employee = (Employee) o; // Cast the object to Employee
+        return employeeID == employee.employeeID; // Check if the employee IDs are equal
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(employeeID); // Generate a hash code using employeeID
+    }
+}
+```
+
+```java
+// Add employees to a HashSet to recognize duplicates by employee ID
+Set<Employee> employeeSet = new HashSet<>(employees);
+```
+
+Add `Employee` objects to a `HashSet`, the set use the overridden `equals()` and `hashCode()` methods to determine if an object is duplicate. If an `Employee` with the same `employeeID` exists, it won't be added again.
+
+**`Output`**:
+```
+HashSet of Employees:
+Employee{employeeID=101, name='John'}
+Employee{employeeID=102, name='Charlie'}
+Employee{employeeID=103, name='Michael'}
+Employee{employeeID=104, name='Eve'}
+Employee{employeeID=105, name='David'}
+```
+
+There is no duplicate key, that is Employee(103, "Michael Duplicate").
+
+#
+## 5.10 Similiar (9), create Map of employee with composite key (department, employeeID)
+
+[<ins>`Code - 5.10 Composite Key Map of Employee`</ins>](code/src/main/java/org/example/assignment5/CompositeKeyMapEmployee.java)
+
+A `Composite Key` is a key that consists of multiple attributes. Used to uniquely identify a record or entry in a collection. In this implementation, for the key is using a composite key object, that is from `MapKey` class.
+
+**`Implementation`**:
+
+```java
+class MapKey {
+    private String department;
+    private int employeeID;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true; // Check if the compared objects are the same instance
+        if (o == null || getClass() != o.getClass()) return false; // Check if the compared object is null or not of the same class
+        MapKey that = (MapKey) o; // Cast the object to MapKey
+        // Check if both department and employeeID are equal
+        return employeeID == that.employeeID && Objects.equals(department, that.department);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(department, employeeID); // Generate a hash code using department and employeeID
+    }
+
+    ... // Other code
+}
+```
+
+The `MapKey` class is used to create a composite key containing `department` and `employeeID`. The `equals()` and `hashCode()` methods are overriden for a hash-based collection.
+
+```java
+class Employee {
+    private int employeeID;
+    private String name;
+    private String department;
+
+    ...
+}
+``` 
+
+The `Employee` class has `department` field to match with the composite key.
+
+
+```java
+public static void main(String[] args) {
+    List<Employee> employees = Arrays.asList(
+        new Employee(101, "John", "Sales"),
+        new Employee(103, "Michael", "IT"),
+        new Employee(102, "Charlie", "HR"),
+        new Employee(105, "David", "IT"),
+        new Employee(104, "Eve", "Sales"),
+    );
+
+    // Convert List<Employee> to Map<CompositeKey, Employee>
+    Map<CompositeKey, Employee> employeeMap = employees.stream()
+        .collect(Collectors.toMap(
+            emp -> new CompositeKey(emp.getDepartment(), emp.getEmployeeID()), // Composite key mapper
+            emp -> emp // Value mapper
+        ));
+
+    // Print the resulting map
+    employeeMap.forEach((key, value) -> System.out.println(key + " -> " + value));
+}
+```
+
+Create a list of `Employee` objects that has `department` field. A list of `Employee` converted into a `Map<MapKey, Employee>` using the `MapKey` as the key (composite). Ensure that each `Employee` is uniquely identified by a combination of `department` and `employeeID`.
+
+**`Output`**:
+```
+MapKey{department='Sales', employeeID=101} -> Employee{employeeID=101, name='John', department='Sales'}
+MapKey{department='Sales', employeeID=104} -> Employee{employeeID=104, name='Eve', department='Sales'}
+MapKey{department='IT', employeeID=103} -> Employee{employeeID=103, name='Michael', department='IT'}
+MapKey{department='HR', employeeID=102} -> Employee{employeeID=102, name='Charlie', department='HR'}
+MapKey{department='IT', employeeID=105} -> Employee{employeeID=105, name='David', department='IT'}
+```
+
+Each `Employee` identified by a key that is combination of `department` and `employeeID`.
+
+#
+## 5.11 What is issue with below code. Explain and fix
+
+**`The code`**:
+
+```java
+public static void demo1() {
+    List<String> data = new ArrayList<>();
+    data.add("Joe");
+    data.add("Helen");
+    data.add("Test");
+    data.add("Rien");
+    data.add("Ruby");
+    for (String d: data) {
+        if (d.equals("Test")) {
+            data.remove(d);
+        }
+    }
+}
+```
+
+**`Explain The Issue`**:
+
+When using an enhanced for loop (for-each loop) to iterate over a collection (`ArrayList` in this case), an implicit `iterator` is used. The `iterator` maintains a `modification count` as an internal state that incremented every time the collection is modified, like when elements are added or removed.
+
+During the iteration, the `iterator` checks if the `count` changes unexpected. If directly modify the collection by `data.remove(d)`, the `modification count` changes but the `iterator` is not aware of the changes because it did not initiate.
+
+When the `iterator` detects a unexpected modification, it throws a `ConcurrentModificationException` as a signal that collection has been concurrently modified.
+
+**`Fix`**:
+
+To avoid the exception, use an explicit `iterator` to call the `remove` method to remove elements safely, or it can be use `streams` to filter out the elements. In this example, I'll using the `Streams` to fix the code.
+
+```java
+public static void demo1() {
+    List<String> data = new ArrayList<>();
+    data.add("Joe");
+    data.add("Helen");
+    data.add("Test");
+    data.add("Rien");
+    data.add("Ruby");
+    
+    // Using streams to filter out the "Test" element
+    data = data.stream()
+        .filter(d -> !d.equals("Test"))
+        .collect(Collectors.toList());
+}
+```
+
+It convert the list to a stream, and then using a `filter` method to exclude the "Test" element, lastly it collect the filtered elements back into a list.
+
+#
+## 5.12 What happen multiple threads to access and modify a shared collection concurrently? Note: ConcurrencyModificationException
+
+When multiple threads access and modify a shared collection concurrently without proper synchronization, there will be several issues arise:
+
+- `ConcurrentModificationException`
+
+    The `ConcurrentModificationException` is a runtime exception when a collection is modified concurrently while beign iterated. The exception thrown when a single thread modifies the collection directly while another thread is iterating the collection using an iterator or an enhanced for loop.
+
+- `Data Problem`
+
+    When multiple threads modify a collection simultaneously, the internal data structure can become incosistent, even might get corrupted because the unpredicable behavior.
+
+**Prevent The Issues**
+
+To prevent the issues that can be arise because the multiple threads access and modify a shared collection concurrently, it can be done in the following:
+
+- `Synchronization`
+
+    Using synchronized methods to ensure only one thread can modify the collection at a time to prevent concurrent modifications.
+
+    ```java
+    synchronized (list) {
+        list.remove("C");
+    }
+    ```
+
+- `Concurrent Collections`
+
+    There is concurrent collection classes in the `java.util.concurrent` package to handle the concurrent access and modification safely, such as `ConcurrentHashMap`, `ConcurrentLinkedQueue`, and `CopyOnWriteArrayList`.
