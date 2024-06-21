@@ -8,6 +8,9 @@
 - [Assignment 3](week-2/Assignment3.md) / [Code Assignment 3](week-2/code/src/main/java/org/example/assignment3/)
 - [Assignment 4](week-2/Assignment4.md) / [Code Assignment 4](week-2/code/src/main/java/org/example/assignment4/)
 - [Assignment 5](week-2/Assignment5.md) / [Code Assignment 5](week-2/code/src/main/java/org/example/assignment5/)
+- [Assignment 6](week-2/Assignment6.md) / [Code Assignment 6](week-2/code/src/main/java/org/example/assignment6/)
+- [Assignment 7](week-2/Assignment7.md) / [Code Assignment 7](week-2/code/src/main/java/org/example/assignment7/)
+- [Assignment 8](week-2/Assignment8.md) / [Code Assignment 8](week-2/code/src/main/java/org/example/assignment8/)
 
 #
 ## Week 1
