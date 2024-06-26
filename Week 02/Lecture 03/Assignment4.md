@@ -1,10 +1,10 @@
 # Assignment 4
 
-[<ins>`Assignment 4 Code`</ins>](code/src/main/java/org/example/assignment4/)
+[<ins>`Assignment 4 Code`</ins>](../code/src/main/java/org/example/assignment4/)
 
 ## 4.1 Q: Explain about Deadlock and give example? How to prevent
 
-[<ins>`Code - 4.1 Deadlock`</ins>](code/src/main/java/org/example/assignment4/Deadlock.java)
+[<ins>`Code - 4.1 Deadlock`</ins>](../code/src/main/java/org/example/assignment4/Deadlock.java)
 
 Deadlock is a situation in concurrent programming where two or more threads are waiting each other to release a resource, makes the treads are blocked forever. Also when a thread is waiting for an object lock that is acquired by another thread, and the other thread is waiting for an object lock that is acquired by the first thread. When the threads are waiting for each other to release the lock or resource forever, this condition is called deadlock.
 
@@ -62,7 +62,7 @@ public class Deadlock {
 
 In this `Deadlock` class, there are two threads are created to acquire locks on two resources in different orders. If both threads start at the same time, they may acquire one resource and then wait for other resource to become available. This results in a deadlock where neither thread can proceed.
 
-[<ins>`Code - 4.1 Deadlock Prevent`</ins>](code/src/main/java/org/example/assignment4/DeadlockPrevent.java)
+[<ins>`Code - 4.1 Deadlock Prevent`</ins>](../code/src/main/java/org/example/assignment4/DeadlockPrevent.java)
 
 Preventing deadlock in multi-threaded programming by:
 - **Avoid cyclic dependency**: Avoid the need for acquiring multiple locks for a thread, if a thread need multiple locks, ensure that each thread acquires the locks in the same order.
@@ -132,7 +132,7 @@ In the `DeadlockPrevent` class, there are two threads (`thread1` and `thread2`) 
 #
 ## 4.2 Creates a bank account with concurrent deposits and withdrawals using threads.
 
-[<ins>`Code - 4.2 Bank Account`</ins>](code/src/main/java/org/example/assignment4/BankAccount.java)
+[<ins>`Code - 4.2 Bank Account`</ins>](../code/src/main/java/org/example/assignment4/BankAccount.java)
 
 Implementation:
 ```java
@@ -208,7 +208,7 @@ When we run the program, the deposit and withdraw operations are performed `conc
 #
 ## 4.3 Write a Java program that sorts an array of integers using multiple threads.
 
-[<ins>`Code - 4.3 Multiple Threads Sort`</ins>](code/src/main/java/org/example/assignment4/MultiThreadSort.java)
+[<ins>`Code - 4.3 Multiple Threads Sort`</ins>](../code/src/main/java/org/example/assignment4/MultiThreadSort.java)
 
 The MultiThreadSort class is class for sorts an array of integers using merge sort algorithm.
 
@@ -255,7 +255,7 @@ When using multiple threads in Java, there are several noticeable things about t
 #
 ## 4.5 Illustrate the usage of the ReadWriteLock interface for concurrent read-write access to a shared resource.
 
-[<ins>`Code - 4.5 ReadWriteLock`</ins>](code/src/main/java/org/example/assignment4/ReadWriteLock.java)
+[<ins>`Code - 4.5 ReadWriteLock`</ins>](../code/src/main/java/org/example/assignment4/ReadWriteLock.java)
 
 ReadWriteLock interface provides two locks (readLock and writeLock) to control access to a shared resource in a concurrent environment.
 

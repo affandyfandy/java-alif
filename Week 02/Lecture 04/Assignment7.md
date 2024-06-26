@@ -1,10 +1,10 @@
 # Assignment 7
 
-[<ins>`Assignment 7 Code`</ins>](code/src/main/java/org/example/assignment7)
+[<ins>`Assignment 7 Code`</ins>](../code/src/main/java/org/example/assignment7)
 
 ## 7.1 Remove duplicated items for any object and any duplicated field
 
-[<ins>Code - 7.1 Remove duplicated items</ins>](code/src/main/java/org/example/assignment7/RemoveDuplicateAny.java)
+[<ins>Code - 7.1 Remove duplicated items</ins>](../code/src/main/java/org/example/assignment7/RemoveDuplicateAny.java)
 
 Using generic approach to remove duplicated items from a collection based and on a specific field. The `Collectors.toMap()` method will ensure that there are no duplicate keys based on the specific field.
 
@@ -63,7 +63,7 @@ Employee{id=106, name='Alice', age=31, salary=55000}
 #
 ## 7.2 Demo: Using Wildcards With Generics
 
-[<ins>Code - 7.2 Wildcards Demo</ins>](code/src/main/java/org/example/assignment7/WildcardDemo.java)
+[<ins>Code - 7.2 Wildcards Demo</ins>](../code/src/main/java/org/example/assignment7/WildcardDemo.java)
 
 
 `Wildcards` in generics are used to create flexibility and reusability code by allowing parameters by various types to maintain type safety.
@@ -160,7 +160,7 @@ Lower bounded wildcard demo:
 #
 ## 7.3  Sort by any field and Find item has max value of any field from list of any object.
 
-[<ins>Code - 7.3 Sort and find any field from list of any field</ins>](code/src/main/java/org/example/assignment7/RemoveDuplicateAny.java)
+[<ins>Code - 7.3 Sort and find any field from list of any field</ins>](../code/src/main/java/org/example/assignment7/SortAndFindAny.java)
 
 To do the sort and find max value, it can be achieve by a `sort()` method and `max()` method. Also, to achieve any field and object, use a generic method to do.
 
@@ -231,7 +231,7 @@ Employee with max salary: Employee{id=102, name='Bob', age=25, salary=60000}
 #
 ## 7.4 Convert list any object to map with any key field
 
-[<ins>Code - 7/4 Convert list any object to map</ins>](code/src/main/java/org/example/assignment7/ConvertListToMap.java)
+[<ins>Code - 7/4 Convert list any object to map</ins>](../code/src/main/java/org/example/assignment7/ConvertListToMap.java)
 
 Using `generics`, `streams`, and `collectors` to convert a list of any type of objects into a map using a specified key field.
 
@@ -283,7 +283,7 @@ Employee Map by ID:
 #
 ## 7.5 Design Class generic for paging data (any Object). Demo the use.
 
-[<ins>Code - 7.5 Class generic for paging data</ins>](code/src/main/java/org/example/assignment7/PagingData.java)
+[<ins>Code - 7.5 Class generic for paging data</ins>](../code/src/main/java/org/example/assignment7/PagingData.java)
 
 Creating a `generic` class for paging data to handle paging of any type of objects. Including objects, page size, current page, and navigate.
 

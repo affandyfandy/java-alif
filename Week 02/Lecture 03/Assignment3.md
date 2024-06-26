@@ -1,6 +1,6 @@
 # Assignment 3
 
-[<ins>`Assignment 3 Code`</ins>](code/src/main/java/org/example/assignment3)
+[<ins>`Assignment 3 Code`</ins>](../code/src/main/java/org/example/assignment3)
 
 #
 ## 3.1 Q1 : Research and explain try-with-resources ?
@@ -22,7 +22,7 @@ The `try-with-resources` read a file named "sample.txt" each line using Scanner 
 #
 ## 3.2 Q2: Throw vs throws, give example
 
-[<ins>`Code - 3.2 Throw vs throws`</ins>](code/src/main/java/org/example/assignment3/ThrowAndThrows.java)
+[<ins>`Code - 3.2 Throw vs throws`</ins>](../code/src/main/java/org/example/assignment3/ThrowAndThrows.java)
 
 
 The `throw` and `throws` is the concept of exception handling, where the `throw` keyword is used to explicitly trigger an exception from a method or a block of code, while the `throws` keyword is included in a method's signature to indicate that it may throw an exception.
@@ -80,10 +80,10 @@ The `divideNum` method is declared with `throws Arithmetic` that indicate it can
 #
 ## 3.3 Lab 1 (try to use try-with-resources)
 
-[<ins>`Code - 3.3 Lab 1`</ins>](code/src/main/java/org/example/assignment3/FileReadWrite.java)
+[<ins>`Code - 3.3 Lab 1`</ins>](../code/src/main/java/org/example/assignment3/FileReadWrite.java)
 
 
-[`test1.txt`](code/src/main/java/org/example/assignment3/lab1/test1.txt)
+[`test1.txt`](../code/src/main/java/org/example/assignment3/lab1/test1.txt)
 :
 ```
 Hello, some text here
@@ -142,7 +142,7 @@ The `readWriteFile` method reads from test1.txt using a `BufferedReader` within 
 #
 ## 3.4 Lab 2
 
-[<ins>`Code - 3.4 Lab 2`</ins>](code/src/main/java/org/example/assignment3/Lab2Exception.java)
+[<ins>`Code - 3.4 Lab 2`</ins>](../code/src/main/java/org/example/assignment3/Lab2Exception.java)
 
 
 Lab2Exception:
@@ -208,7 +208,7 @@ In this Menu class, the program implements a simple menu system where users can 
 #
 ## 3.5 Lab 3
 
-[<ins>`Code - 3.5 Lab 3`</ins>](code/src/main/java/org/example/assignment3/VowelException.java)
+[<ins>`Code - 3.5 Lab 3`</ins>](../code/src/main/java/org/example/assignment3/VowelException.java)
 
 
 Vowel Exception:

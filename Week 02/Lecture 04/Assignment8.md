@@ -1,6 +1,6 @@
 # Assignment 8
 
-[<ins>`Assignment 8 Code`</ins>](code/src/main/java/org/example/assignment8)
+[<ins>`Assignment 8 Code`</ins>](../code/src/main/java/org/example/assignment8)
 
 ## 8.1 What Is the serialVersionUID?
 
@@ -39,6 +39,8 @@ The `serialVersionUID` is explicitly declared as `1L`. Increment the `serialVers
 
 #
 ## 8.2 Illustrate Serialization and Deserialization in write list of object (employee) to file and read file to convert to object and using serialVersionUID
+
+[<ins>Code - 8.2 Serialization and Deserialization</ins>](../code/src/main/java/org/example/assignment8/SerializationDeserializationFile.java)
 
 `Serialization` is the process of converting an object into a byte of stream, so that it can be easily saved to a file or sent over a network. `Deserialization` is the byte stream is converted back intoa copy of the object. The `serialVersionUID` is a unique identifier for each class during serialization and deserialization progress.
 

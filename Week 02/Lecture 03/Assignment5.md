@@ -1,6 +1,6 @@
 # Assignment 5
 
-[<ins>`Assignment 5 Code`</ins>](code/src/main/java/org/example/assignment5)
+[<ins>`Assignment 5 Code`</ins>](../code/src/main/java/org/example/assignment5)
 
 ## 5.1 Collection Comparison
 
@@ -34,7 +34,7 @@ The comparison of `ArrayList` vs `LinkedList`
 #
 ## 5.2 Write a Java program to retrieve an element (at a specified index) from a given array list.
 
-[<ins>`Code - 5.2 Retrieve an alement from ArrayList`</ins>](code/src/main/java/org/example/assignment5/RetrieveElementFromArrayList.java)
+[<ins>`Code - 5.2 Retrieve an alement from ArrayList`</ins>](../code/src/main/java/org/example/assignment5/RetrieveElementFromArrayList.java)
 
 Retrieve an element from a specific index in an ArrayList by using the `get()` method provided by the ArrayList class. Belo is the implementation.
 
@@ -83,7 +83,7 @@ The output will be: `Element at index 3 is: 40`.
 #
 ## 5.3 Remove lines which is duplicated data by 1 key field
 
-[<ins>`Code - 5.3 Remove duplicated lines`</ins>](code/src/main/java/org/example/assignment5/RemoveDuplicates.java)
+[<ins>`Code - 5.3 Remove duplicated lines`</ins>](../code/src/main/java/org/example/assignment5/RemoveDuplicates.java)
 
 Removing lines that is duplicated data based on a key field from a CSV file and write the unique data to a new file by:
 
@@ -146,7 +146,7 @@ Iterate over `uniqueEntries` and write each entry to the output CSV file using `
 #
 ## 5.4 Get a shallow copy of a HashMap instance
 
-[<ins>`Code - 5.4 Shallow copy HashMap`</ins>](code/src/main/java/org/example/assignment5/ShallowCopyHashMap.java)
+[<ins>`Code - 5.4 Shallow copy HashMap`</ins>](../code/src/main/java/org/example/assignment5/ShallowCopyHashMap.java)
 
 A shallow copy of a `HashMap` is a new `HashMap` with mappings to the same key and value objects as the original `HashMap`. To get a shallow copy of a `HashMap`, use the `clone()` method. The object referenced by the keys and values are not cloned, only the references are copied.
 
@@ -188,7 +188,7 @@ The implementation in the code contain:
 #
 ## 5.5 Convert List to Map (ex: employee with employeeID as a key and order asc by key).
 
-[<ins>`Code - 5.5 Convert List to Map`</ins>](code/src/main/java/org/example/assignment5/ConvertListToMap.java)
+[<ins>`Code - 5.5 Convert List to Map`</ins>](../code/src/main/java/org/example/assignment5/ConvertListToMap.java)
 
 Covert a `List` of `Employee` objects into a `Map` where the `employeeID` as a key, by using Java streams with `Collectors.toMap`. The implementation code containing:
 
@@ -220,7 +220,7 @@ Map<Integer, Employee> employeeMap = employees.stream()
 #
 ## 5.6 Demo CopyOnWriteArrayList when modify item
 
-[<ins>`Code - 5.6 CopyOnWriteArrayList`</ins>](code/src/main/java/org/example/assignment5/CopyOnWriteArrayListLab.java)
+[<ins>`Code - 5.6 CopyOnWriteArrayList`</ins>](../code/src/main/java/org/example/assignment5/CopyOnWriteArrayListLab.java)
 
 The `CopyOnWriteArrayList` is a thread-safe variant of `ArrayList`. Making a fresh copy of the underlying array for every write operation (add, set, remove). The read operations do not require locks and can proceed concurrently with write operations without being affected by them.
 
@@ -295,7 +295,7 @@ The `CopyOnWriteArrayList` ensures that the `reader thread` has consistent view 
 #
 ## 5.7 Demo ConcurrencyHashMap
 
-[<ins>`Code - 5.7 ConcurrencyHashMap`</ins>](code/src/main/java/org/example/assignment5/ConcurrencyHashMap.java)
+[<ins>`Code - 5.7 ConcurrencyHashMap`</ins>](../code/src/main/java/org/example/assignment5/ConcurrencyHashMap.java)
 
 The `ConcurrentHashMap` is a thread-safe variant of `HashMap` that is designed for concurrent access. `ConcurrentHashMap` uses a finer-grained locking mechanism to allow higher concurrency for each operation.
 
@@ -423,7 +423,7 @@ The relationship between `equals()` and `hashCode()` are if `equals()` is overri
 #
 ## 5.9 See assignment 5.5, add employee to HashSet. How can it recognize that 2 employee has duplicated employee ID? Implement it
 
-[<ins>`Code - 5.9 HashSet Employee`</ins>](code/src/main/java/org/example/assignment5/HashSetEmployee.java)
+[<ins>`Code - 5.9 HashSet Employee`</ins>](../code/src/main/java/org/example/assignment5/HashSetEmployee.java)
 
 To recognize duplicate employee ID when adding `Employee` objects to a `HashSet`, override the `equals()` and `hashCode()` methods in the model, that is `Employee` class. This ensures that two `Employee` objects with the same `employeeID` are equal.
 
@@ -499,7 +499,7 @@ There is no duplicate key, that is Employee(103, "Michael Duplicate").
 #
 ## 5.10 Similiar (9), create Map of employee with composite key (department, employeeID)
 
-[<ins>`Code - 5.10 Composite Key Map of Employee`</ins>](code/src/main/java/org/example/assignment5/CompositeKeyMapEmployee.java)
+[<ins>`Code - 5.10 Composite Key Map of Employee`</ins>](../code/src/main/java/org/example/assignment5/CompositeKeyMapEmployee.java)
 
 A `Composite Key` is a key that consists of multiple attributes. Used to uniquely identify a record or entry in a collection. In this implementation, for the key is using a composite key object, that is from `MapKey` class.
 

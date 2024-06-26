@@ -1,10 +1,10 @@
 # Assignment 6
 
-[<ins>`Assignment 6 Code`</ins>](code/src/main/java/org/example/assignment6)
+[<ins>`Assignment 6 Code`</ins>](../code/src/main/java/org/example/assignment6)
 
 ## 6.1 When we use parallel stream? What is notice? Give some example?
 
-[<ins>`Code - 6.1 Parallel Stream`</ins>](code/src/main/java/org/example/assignment6/ParallelStreamFilter.java)
+[<ins>`Code - 6.1 Parallel Stream`</ins>](../code/src/main/java/org/example/assignment6/ParallelStreamFilter.java)
 
 `Parallel stream` is a feature that allows for parallel processing of data, enable to execute code in parallel on separate cores. When using `parallel stream`, it can be divide the code into multiple streams that are executed in parallel on separate cores, and the final result is the combination of the individual outcomes. Using multiple threads form `ForkJoinPool` to process the elements concurrently, and will improve the performance operations.
 
@@ -84,7 +84,7 @@ There's no words that has length of the character is less or equal than 3.
 #
 ## 6.2 Remove all duplicate elements from a list of string using streams
 
-[<ins>`Code - 6.2 Remove Duplicate Elements From List`</ins> ](code/src/main/java/org/example/assignment6/RemoveDuplicateElementsList.java)
+[<ins>`Code - 6.2 Remove Duplicate Elements From List`</ins> ](../code/src/main/java/org/example/assignment6/RemoveDuplicateElementsList.java)
 
 Remove all duplicate elements from a list of string using Streams, by using the `distinct()` method of the `Stream` interface. This method will returning a stream consisting of the distinct elements that according to `Object.equals(Object)`.
 
@@ -121,7 +121,7 @@ The order of elements will be the same as the original list.
 
 A program that reads data from a file, removes lines that duplicated key fields, and write the filtered unique lines to a new file. In this case, I'll use data from CSV fromat file, and the key field is column `"ID"`
 
-[<ins>`Code - 6.3 Remove Duplicate Line By Key From File`</ins> ](code/src/main/java/org/example/assignment6/RemoveDuplicateLineData.java)
+[<ins>`Code - 6.3 Remove Duplicate Line By Key From File`</ins> ](../code/src/main/java/org/example/assignment6/RemoveDuplicateLineData.java)
 
 **Explanation**:
 
@@ -218,7 +218,7 @@ There is no more duplicated line by key.
 #
 ## 6.4 Count the number of string in a list that start with a specific letter using streams.
 
-[<ins>`Code - 6.4 Count the number of strings that start with a specific letter`</ins> ](code/src/main/java/org/example/assignment6/CountStringsListStartingWith.java)
+[<ins>`Code - 6.4 Count the number of strings that start with a specific letter`</ins> ](../code/src/main/java/org/example/assignment6/CountStringsListStartingWith.java)
 
 
 Count the number of strings in a list that start with a specific letter, by using streams. The `filter()` method retain only strings that start with the spesific letter, and the `count()` method to get the number of elements in the filtered stream.
@@ -262,7 +262,7 @@ System.out.println("Number of strings starting with " + startingLetter + ": " + 
 
 Using `Streams` to a list of employees for complete the task, sorting names alphabetically, finding the employee with the maximum salary, and checking if any employee names match specific keywords.
 
-[<ins>`Code - 6.5 Sort, find, and check from list of Employees`</ins> ](code/src/main/java/org/example/assignment6/EmployeeOperations.java)
+[<ins>`Code - 6.5 Sort, find, and check from list of Employees`</ins> ](../code/src/main/java/org/example/assignment6/EmployeeOperations.java)
 
 **Input**:
 
@@ -382,7 +382,7 @@ Employee{id=107, name='John Doe', age=33, salary=65000}
 #
 ## 6.6 Convert list employees to map with ID as key
 
-[<ins>`Code - 6.6 Convert list of employees to map`</ins> ](code/src/main/java/org/example/assignment6/ConvertListEmployeesToMap.java)
+[<ins>`Code - 6.6 Convert list of employees to map`</ins> ](../code/src/main/java/org/example/assignment6/ConvertListEmployeesToMap.java)
 
 Converting a list of employees to a map with their ID as the key, and the Employee object as the value. Uses the `Collectors.toMap()` method.
 

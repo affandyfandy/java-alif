@@ -1,15 +1,15 @@
 # Assignment 2
 
-[<ins>`Assignment 2 Code`</ins>](code/src/main/java/org/example/assignment2/)
+[<ins>`Assignment 2 Code`</ins>](../code/src/main/java/org/example/assignment2/)
 
 
 ## 2.1 Q: Slide 10: what happen if implement 2 interface have same default method? How to solve? Demo in code.
 
-[<ins>`Code - 2.1 MyClass`</ins>](code/src/main/java/org/example/assignment2/MyClass.java)
+[<ins>`Code - 2.1 MyClass`</ins>](../code/src/main/java/org/example/assignment2/MyClass.java)
 
-[<ins>`Code - 2.1 FirstInterface`</ins>](code/src/main/java/org/example/assignment2/FirstInterface.java)
+[<ins>`Code - 2.1 FirstInterface`</ins>](../code/src/main/java/org/example/assignment2/FirstInterface.java)
 
-[<ins>`Code - 2.1 SecondInterface`</ins>](code/src/main/java/org/example/assignment2/SecondInterface.java)
+[<ins>`Code - 2.1 SecondInterface`</ins>](../code/src/main/java/org/example/assignment2/SecondInterface.java)
 
 When a class implements two interfaces that have the same default method, it results in a conflict, and the implementing class must override the conflicting method to resolve the ambiguity of the same default method.
 
@@ -106,23 +106,23 @@ In the main method, an instance of MyFunctionalInterface is created using a lamb
 #
 ## 2.4 Implement class/interface
 
-- [ATM Interface](code/src/main/java/org/example/assignment2/ATM.java)
+- [ATM Interface](../code/src/main/java/org/example/assignment2/ATM.java)
 
 The `ATM` interface defines a contract for ATM operations, including withdraw, deposit, queryBalance, login, and logout.
 
-- [ATMImpl Class](code/src/main/java/org/example/assignment2/ATMImpl.java)
+- [ATMImpl Class](../code/src/main/java/org/example/assignment2/ATMImpl.java)
 
 The `ATMImpl` class implements the `ATM` interface, managing ATM operations. Handle withdrawals, deposits, balance queries, login, and logout.
 
-- [Account Interface](code/src/main/java/org/example/assignment2/Account.java)
+- [Account Interface](../code/src/main/java/org/example/assignment2/Account.java)
 
 The `Account` interface defines basic operations for bank account.
 
-- [SavingAccount Class](code/src/main/java/org/example/assignment2/SavingAccount.java)
+- [SavingAccount Class](../code/src/main/java/org/example/assignment2/SavingAccount.java)
 
 The `SavingAccount` class implements the `Account` interface, representing a saving account with methods to deposit, withdraw, and get the balance.
 
-- [CurrentAccount Class](code/src/main/java/org/example/assignment2/CurrentAccount.java)
+- [CurrentAccount Class](../code/src/main/java/org/example/assignment2/CurrentAccount.java)
 
 The `CurrentAccount` class implements the `Account` interface, representing a current account with methods for depositing, withdrawing with additional overdraft limit, and retrieving the balance.
 

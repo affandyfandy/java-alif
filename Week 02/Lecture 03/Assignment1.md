@@ -1,9 +1,9 @@
 # Assignment 1
-[<ins>`Assignment 1 Code`</ins>](code/src/main/java/org/example/assignment1/)
+[<ins>`Assignment 1 Code`</ins>](../code/src/main/java/org/example/assignment1/)
 
 ## 1.1 LAB 1
 
-[<ins>`Code - 1.1 Dog Class`</ins>](code/src/main/java/org/example/assignment1/Dog.java)
+[<ins>`Code - 1.1 Dog Class`</ins>](../code/src/main/java/org/example/assignment1/Dog.java)
 
 A dog has:
 - States - color, name, breed
@@ -40,8 +40,8 @@ public class Dog {
 #
 ## 1.2 LAB 2
 
-[<ins>`Code - 1.2 Teacher Class`</ins>](code/src/main/java/org/example/assignment1/Teacher.java)
-[<ins>`Code - 1.2 Subject Class`</ins>](code/src/main/java/org/example/assignment1/Subject.java)
+[<ins>`Code - 1.2 Teacher Class`</ins>](../code/src/main/java/org/example/assignment1/Teacher.java)
+[<ins>`Code - 1.2 Subject Class`</ins>](../code/src/main/java/org/example/assignment1/Subject.java)
 
 
 **Teacher Class**
@@ -117,9 +117,9 @@ public class Subject {
 #
 ## 1.3 LAB 3
 
-[<ins>`Code - 1.3 Student Class`</ins>](code/src/main/java/org/example/assignment1/Student.java)
+[<ins>`Code - 1.3 Student Class`</ins>](../code/src/main/java/org/example/assignment1/Student.java)
 
-[<ins>`Code - 1.3 Teacher Class`</ins>](code/src/main/java/org/example/assignment1/Teacher.java)
+[<ins>`Code - 1.3 Teacher Class`</ins>](../code/src/main/java/org/example/assignment1/Teacher.java)
 
 
 
