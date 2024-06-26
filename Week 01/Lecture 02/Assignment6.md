@@ -56,6 +56,19 @@ The `main()` method calls the `buildPerson()` static method, also the allocation
 
 The `heap` memory stores all instance variables for the newly created `Person` object.
 
+\
+**Comparison**
+
+| Parameter | Stack | Heap |
+| --- | --- | --- |
+| **Application** | Stack is used in parts, one at a time during execution of a thread | The entire application uses Heap space during runtime |
+| **Size** | The entire application uses Heap space during runtime | There is no size limit on Heap |
+| **Storage** | Stores only primitive variables and references to objects that are created in Heap Space | All the newly created objects are stored here |
+| **Order** | It’s accessed using Last-in First-out (LIFO) memory allocation system	| This memory is accessed via complex memory management techniques that include Young Generation, Old or Tenured Generation, and Permanent Generation. |
+| **Life** | Stack memory only exists as long as the current method is running | Heap space exists as long as the application runs |
+| **Efficiency** | Much faster to allocate when compared to heap | Slower to allocate when compared to stack |
+| **Allocation/Deallocation** | This Memory is automatically allocated and deallocated when a method is called and returned, respectively | Heap space is allocated when new objects are created and deallocated by Gargabe Collector when they’re no longer referenced |
+
 #
 ## Modify the object that the reference points to
 
