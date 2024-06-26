@@ -1,6 +1,60 @@
 # Explain previous slice as slice 6 (stack & heap).
 
-Memory allocation is divided into stack memory and heap memory. Stack memory is used for storing method call frames and local variables, with each thread having its own stack. Heap memory, on the other hand, is where objects are allocated, particularly those created using the new keyword.
+Memory management is a aspect for storing data and managing the execution of programs. In this section will explain about the `stack` and `heap` memory.
+
+1. **Stack**
+
+    The `stack` memory stores data in a last-in first-out (LIFO). It used for static memory allocation and manages the execution of threads. Also, it stores `method calls`, `local variables`, and `reference variables`​. When a method is called, a new block or `stack frame` that contains the method's local variables, parameters, and the return address will created on the top of the `stack`.
+
+    The `stack` stores primitive data types, like `int`, `char`, and `float`, also it store references to `objects` but not the object themselves.
+
+2. **Heap**
+
+    The `heap` memory used for dynamic memory allocation. It stores objects and arrays. It stores `objects` and `arrays` that are created during the execution of the program. The `heap` is much larger and more complex than the `stack`. It need a `garbage collection`. The `garbage collection` reclaims memory occupied by `objects` that are no longer in use.
+
+    All `objects` in Java are stored in the `heap` memory, including instances of `classes`, `arrays`, and other reference data types.
+
+\
+**Stack & Heap**
+
+![StackHeapExample](img/java-heap-stack-diagram.png)
+
+```java
+class Person {
+    int id;
+    String name;
+
+    public Person(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+}
+
+public class PersonBuilder {
+    private static Person buildPerson(int id, String name) {
+        return new Person(id, name);
+    }
+
+    public static void main(String[] args) {
+        int id = 23;
+        String name = "John";
+        Person person = null;
+        person = buildPerson(id, name);
+    }
+}
+```
+
+When entering the `main()` method, the `stack` memory allocates some space to store the primitive variavles and references of this method. The primitive value of integer `id` is stored directly in the `stack` memory. The reference variable `person` of type `Person` is also created in the `stack` memory and this variable will point to the actual `Person` object in the `heap`.
+
+Then, when the `main()` method calls the constructor with parameter `Person(int, String)`, the memory is allocated on the stack. This allocation stores:
+
+1. The `this` reference of the calling object
+2. The primitive value `id`
+3. The reference variable for the `String` argument `name` that pointing to the actual string in the string pool within the `heap` memory.
+
+The `main()` method calls the `buildPerson()` static method, also the allocation will take place in the `stack` memory on the top. This method will store variables like before but with the `person` as the reference.
+
+The `heap` memory stores all instance variables for the newly created `Person` object.
 
 #
 ## Modify the object that the reference points to
