@@ -311,41 +311,147 @@ The `circular` dependency can lead to issues during bean initialization if not h
 4. Use `@PostConstruct` annotation to set the other dependency.
 5. Impelement `ApplicationContextAware`, and the bean has access to Spring context and can extract the other bean from there. Also implement `InitializingBean` to indicate that this bean has to do some actions after all its properties have been set.
 
-## 2.4 Q: Diference between BeanFactory and ApplicationContext ?​
+## 2.4 Explain and give examples for some annotations in slide 19.​
 
-| ​Feature | BeanFactory | ApplicationContext |
-| --- | --- | --- |
-| **Container Type** | Basic container | Advanced container |
-| **Initialization** | Lazy initialized by default | Eager initialized by default |
-| **Lightweight** | Yes | No (due to additional features) |
-| **Customization** | Basic support for dependency injection and lifecycle management | Extensible with additional features and configuration options |
-| **Core Interface** | Yes | Yes, extends BeanFactory |
-| **Automatic Post-processing** | No | Yes |
-| **Internationalization** | No | Yes, supports message resolution for localization |
-| **Event Handling** | No | Yes, supports event propagation within the container |
-| **Hierarchy Support** | No | Yes |
-| **Common Implementations** | `XmlBeanFactory`, `DefaultListableBeanFactory` | `ClassPathXmlApplicationContext`, `AnnotationConfigApplicationContext` |
-| **Suitable For** | Basic applications, resource-constrained environments | Most enterprise applications, larger systems |
+Annotations in Spring Boot help to configure and manage `beans`, `dependencies`, and the `application context`.
 
-### BeanFactory
+### @Configuration
 
-BeanFactory is the most basic version of inversion of control containers.
+`@Configuration` indicates that the class can be used by the Spring inversion of control container as a source of beans.
 
-1. Container type, BeanFactory provides basic mechanism for dependency injection and bean lifecycle management.
-2. Lazy initialization, Beans are lazily initialized by default, means a bean created and its dependencies are injected only when requested via `getBean()` method.
-3. Lightweight, BeanFactory is lightweight because it only initializes beans when needed.
-4. Customization, BeanFactory provides extends and customization by impleemnting custom factories or extending existing implementations.
-5. Core interface, it is the core interface for accessing and managing beans in Spring.
-6. Commpon implementations including `XmlBeanFactory` and `DefaultListableBeanFactory`.
-7. Suitable for basic application or environment with resource contstraints where lightweight and lazy init of beans are preferred.
+```java
+@Configuration
+public class AppConfig { }
+```
 
-### ApplicationContext
+### @Bean
 
-1. Container type, this extends the BeanFactory and provides more advanced container with additional enterprise features.
-2. Eager initialization, beans are eagerly initialized by default, all singleton beans are created and their dependencies are injected at application startup unless marked as lazy.
-3. Automatic post-processing, allowing more extensive configuration and customization of dependency injection.
-4. Internationalization, provides messages based on locale-specific properties file or database resources.
-5. Event handling, ApplicationContext supports event propagation within the container context, with communication between components through events and listeners.
-6. Hieararchi support, where one ApplicationContext can be a parent of another.
-7. Common implementations include `ClassPathXmlApplicationContext` and `AnnotationConfigApplicationContext`.
-8. Suitable for most enterprise application and larger system where advanced features are required.
+`@Bean` indicates that a method will produces a bean to can be managed by the Spring container.
+
+```java
+@Configuration
+public class AppConfig {
+    @Bean
+    public UserService userService() {
+        return new UserServiceImpl();
+    }
+}
+```
+
+### @ComponentScan
+
+`@ComponentScan` configures component scanning directives so the Spring can take the component and use with `@Configuration` classes.
+
+```java
+@Configuration
+@ComponentScan(basePackages = "com.example")
+public class AppConfig { }
+```
+
+### @Component
+
+`@Component` indicates that a class with this annotation be a `Component`. The class is considered for auto-detection using annotation-based configuration and classpath scanning.
+
+```java
+@Component
+public class UserController { }
+```
+
+### @Service
+
+`@Service` indicates that a class with this annotation be a `Service`, defined by domain driven design as an operation offered as an interface that stands alone in the model with no encapsulated data.
+
+```java
+@Service 
+public class OrderService { }
+```
+
+### @Repository
+
+`@Repository` indocates that a class with this annotation be a `Repository` that can be abstraction of data access and storage.
+
+```java
+@Repository
+public class UserRepository { }
+```
+
+### @Autowired
+
+`@Autowired` marks a constructor, field, setter, or config method as to be autowired to inject the depedencies by Spring.
+
+```java
+@Component
+public class UserController {
+    private final UserService userService;
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+}
+```
+
+### @Scope
+
+`@Scope` configures the scope of the bean, like singleton, prototype, etc.
+
+```java
+@Component
+@Scope("prototype")
+public class TaskProcessor { }
+```
+
+### @Qualifier
+
+`@Qualifier` is used when there are multiple beans of the same type, spescify the exact bean that should be wired with this annotation.
+
+```java
+@Component
+public class UserController {
+    private final UserService userService;
+
+    @Autowired
+    public UserController(@Qualifier("specificUserService") UserService userService) {
+        this.userService = userService;
+    }
+}
+```
+
+### @PropertySource, @Value
+
+`@PropertySource` adds a property source to Spring's environtment. `@Value` is used to inject values into fields from a property source.
+
+```java
+@Configuration
+@PropertySource("classpath:application.properties")
+public class AppConfig {
+
+    @Value("${app.name}")
+    private String appName;
+
+    @Bean
+    public ApplicationInfo applicationInfo() {
+        return new ApplicationInfo(appName);
+    }
+}
+```
+
+### @PreDestroy, @PostConstruct
+
+`@PreDestroy` annotation indicates a method to be invoked before the bean destroyed. `@PostConstruct` indicates a method to be invoked after the bean's initialization.
+
+```java
+@Component
+public class DatabaseConnection {
+
+    @PostConstruct
+    public void init() {
+        // To Do
+    }
+
+    @PreDestroy
+    public void cleanup() {
+        // To Do
+    }
+}
+```
