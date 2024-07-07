@@ -1,4 +1,4 @@
-# Assignment 2 - Lecture 7
+# Assignment 2 - Lecture 8
 
 ## 2.1 Create Employee table with basic information​
 
