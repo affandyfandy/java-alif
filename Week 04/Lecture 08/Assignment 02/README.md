@@ -75,8 +75,13 @@ This class handles database operations including CRUD operations for the `Employ
 @Repository
 public class EmployeeDAO {
 
+    private final JdbcTemplate jdbcTemplate;
+
+    // Constructor-based dependency injection
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    public EmployeeDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     // SQL queries
     private final String INSERT_QUERY = "INSERT INTO Employee (ID, Name, Address, Department) VALUES (?, ?, ?, ?)";
@@ -137,8 +142,12 @@ The `EmployeeController` handles HTTP requests and REST API operations.
 @RequestMapping("/api/employees")
 public class EmployeeController {
 
+    private final EmployeeDAO employeeDAO;
+
     @Autowired
-    private EmployeeDAO employeeDAO;
+    public EmployeeController(EmployeeDAO employeeDAO) {
+        this.employeeDAO = employeeDAO;
+    }
 
     // Create an Employee by sending a POST request to /api/employees with the Employee object in the request body
     @PostMapping

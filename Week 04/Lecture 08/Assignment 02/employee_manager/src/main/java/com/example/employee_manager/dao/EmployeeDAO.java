@@ -13,8 +13,13 @@ import java.sql.SQLException;
 @Repository
 public class EmployeeDAO {
 
+    private final JdbcTemplate jdbcTemplate;
+
+    // Constructor-based dependency injection
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    public EmployeeDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     // SQL queries
     private final String INSERT_QUERY = "INSERT INTO Employee (ID, Name, Address, Department) VALUES (?, ?, ?, ?)";

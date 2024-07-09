@@ -131,3 +131,16 @@ public class Employee {
 ```
 
 The `@Data` annotation generates getters, setters, toString, equals, and hashCode methods. The `@NoArgsConstructor` and `AllArgsConstructor` annotations will generate a no argument constructor and all field argument constructor.
+
+## Test Sample CRUD Project.
+
+**Primary Datasource Get All Employee**
+![Screenshot Get Primary](img/primary-get.png)
+
+**Secondary Datasource Get All Employee**
+![Screenshot Get Secondary](img/secondary-get.png)
+
+The secondary datasource add the `/secondary` suffix.
+
+**Database**
+![Screenshot Database](img/database.png)

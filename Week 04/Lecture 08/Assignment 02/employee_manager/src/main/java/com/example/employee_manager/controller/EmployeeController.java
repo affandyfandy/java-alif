@@ -12,8 +12,12 @@ import java.util.List;
 @RequestMapping("/api/employees")
 public class EmployeeController {
 
+    private final EmployeeDAO employeeDAO;
+
     @Autowired
-    private EmployeeDAO employeeDAO;
+    public EmployeeController(EmployeeDAO employeeDAO) {
+        this.employeeDAO = employeeDAO;
+    }
 
     // Create an Employee by sending a POST request to /api/employees with the Employee object in the request body
     @PostMapping
