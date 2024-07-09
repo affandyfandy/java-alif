@@ -45,6 +45,33 @@ public class DataSourceConfig {
 
 This class configures multiple `DataSource` beans. that is `primary` and `secondary`, these configuration used to connect to two different databases. The `@Value` injects values from the `application.properties` file into the fields, and store the configuration each properties to data source. The `@Bean(name = "primaryDataSource")` regiesters a bean for `primary` data source, and the secondary is same pattern and on another bean. `@Primary` indicates that this is the default data source when no qualifier used. The `DataSourceBuilder.create()` method will creates a new `DataSourceBuilder` instance.
 
+Because of there is secondary data source, I add the secondary DAO to handle operations from the secondary database in [EmployeeSecondaryDAO.java](employee_manager/src/main/java/com/example/employee_manager/dao/EmployeeSecondaryDAO.java). Also in the controller, I add the logic to process the operations, [EmployeeController.java](employee_manager/src/main/java/com/example/employee_manager/controller/EmployeeController.java)
+
+```java
+@RestController
+@RequestMapping("/api/employees")
+public class EmployeeController {
+
+    private final EmployeeDAO employeeDAO;
+    private final EmployeeSecondaryDAO employeeSecondaryDAO;
+
+    // Inject the EmployeeDAO and EmployeeSecondaryDAO using constructor injection
+    @Autowired
+    public EmployeeController(EmployeeDAO employeeDAO, EmployeeSecondaryDAO employeeSecondaryDAO) {
+        this.employeeDAO = employeeDAO;
+        this.employeeSecondaryDAO = employeeSecondaryDAO;
+    }
+
+    // ... other operations
+
+    // [Secondary Datasource] Get all Employees from the secondary database by sending a GET request to /api/employees/secondary
+    @GetMapping("/secondary")
+    public List<Employee> getAllEmployeesFromSecondary() {
+        return employeeSecondaryDAO.findAll();
+    }
+}
+```
+
 ## 3.2 Handle transaction when insert/update data​
 
 [EmployeeDAO.java](employee_manager/src/main/java/com/example/employee_manager/dao/EmployeeDAO.java)
@@ -60,19 +87,31 @@ public class EmployeeDAO {
     // Create the Employee
     @Transactional
     public int save(Employee employee) {
-        return jdbcTemplate.update(INSERT_QUERY, employee.getId(), employee.getName(), employee.getAddress(), employee.getDepartment());
+        try {
+            return jdbcTemplate.update(INSERT_QUERY, employee.getId(), employee.getName(), employee.getAddress(), employee.getDepartment());
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to save the employee. Error: " + e.getMessage());
+        }
     }
 
     // Update the Employee
     @Transactional
     public int update(Employee employee) {
-        return jdbcTemplate.update(UPDATE_QUERY, employee.getName(), employee.getAddress(), employee.getDepartment(), employee.getId());
+        try {
+            return jdbcTemplate.update(UPDATE_QUERY, employee.getName(), employee.getAddress(), employee.getDepartment(), employee.getId());
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to update the employee. Error: " + e.getMessage());
+        }
     }
 
     // Delete the Employee
     @Transactional
     public int delete(String id) {
-        return jdbcTemplate.update(DELETE_QUERY, id);
+        try {
+            return jdbcTemplate.update(DELETE_QUERY, id);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to delete the employee. Error: " + e.getMessage());
+        }
     }
 
     // ... other code

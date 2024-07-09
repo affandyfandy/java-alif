@@ -30,27 +30,47 @@ public class EmployeeDAO {
 
     // Create the Employee
     public int save(Employee employee) {
-        return jdbcTemplate.update(INSERT_QUERY, employee.getId(), employee.getName(), employee.getAddress(), employee.getDepartment());
+        try {
+            return jdbcTemplate.update(INSERT_QUERY, employee.getId(), employee.getName(), employee.getAddress(), employee.getDepartment());
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     // Get all (Read) Employees
     public List<Employee> findAll() {
-        return jdbcTemplate.query(SELECT_QUERY, new EmployeeRowMapper());
+        try {
+            return jdbcTemplate.query(SELECT_QUERY, new EmployeeRowMapper());
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     // Get Employee by ID
     public Employee findById(String id) {
-        return jdbcTemplate.queryForObject(SELECT_BY_ID_QUERY, new EmployeeRowMapper(), id);
+        try {
+            return jdbcTemplate.queryForObject(SELECT_BY_ID_QUERY, new EmployeeRowMapper(), id);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     // Update the Employee
     public int update(Employee employee) {
-        return jdbcTemplate.update(UPDATE_QUERY, employee.getName(), employee.getAddress(), employee.getDepartment(), employee.getId());
+        try {
+            return jdbcTemplate.update(UPDATE_QUERY, employee.getName(), employee.getAddress(), employee.getDepartment(), employee.getId());
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     // Delete the Employee
     public int delete(String id) {
-        return jdbcTemplate.update(DELETE_QUERY, id);
+        try {
+            return jdbcTemplate.update(DELETE_QUERY, id);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     // RowMapper to map the ResultSet to Employee
