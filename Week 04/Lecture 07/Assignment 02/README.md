@@ -455,3 +455,29 @@ public class DatabaseConnection {
     }
 }
 ```
+
+## Additional From PR Comment
+
+**The comment/question**:
+"Can we remove @autowire here? Pls explain"
+
+```java
+@Service
+public class EmployeeServiceConstructor {
+    private final EmailService emailService;
+
+    @Autowired
+    public EmployeeServiceConstructor(@Qualifier("primaryEmailService") EmailService emailService) {
+        this.emailService = emailService;
+    }
+
+    public void notifyEmployee(String receiver, String workDetails) {
+        emailService.sendEmail(receiver, "(Constructor) Work Notification", workDetails);
+    }
+}
+```
+
+**Answer**:
+Yes, in this case, we can remove the `@Autowired` annotation from the construction. In Spring, when a class has a `single constructor`, the Spring will automatically use that constructor for dependency injection even if the `@Autowired` annotation is removed.
+
+Spring automatically resolve and inject dependencies if there is only one constructor or `single constructor`. But, if there is multiple constructor, it need to give the annotation to one of them with `@Autowired` to tell Spring which one to use.

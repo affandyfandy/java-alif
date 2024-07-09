@@ -10,19 +10,40 @@ Using `DataSourceBuilder` to create datasource bean objects.
 @Configuration
 public class DataSourceConfig {
 
-    @Bean
-    public DataSource getDataSource() {
-        DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
-        dataSourceBuilder.url("jdbc:mysql://localhost:3306/fsoft-lecture");
-        dataSourceBuilder.username("root");
-        dataSourceBuilder.password("");
-        return dataSourceBuilder.build();
+    @Value("${spring.datasource.primary.url}")
+    private String primaryUrl;
+
+    // ... other primary data source properties detail
+
+    @Value("${spring.datasource.secondary.url}")
+    private String secondaryUrl;
+
+    // ... other secondary data source properties detail (full in the .java file)
+
+    @Bean(name = "primaryDataSource")
+    @Primary
+    public DataSource primaryDataSource() {
+        return DataSourceBuilder.create()
+            .url(primaryUrl)
+            .username(primaryUsername)
+            .password(primaryPassword)
+            .driverClassName(primaryDriverClassName)
+            .build();
+    }
+
+    @Bean(name = "secondaryDataSource")
+    public DataSource secondaryDataSource() {
+        return DataSourceBuilder.create()
+            .url(secondaryUrl)
+            .username(secondaryUsername)
+            .password(secondaryPassword)
+            .driverClassName(secondaryDriverClassName)
+            .build();
     }
 }
 ```
 
-The `DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create()` will creates an instance of `DataSourceBuilder` that simplifies the creation of `DataSource` objects. The `dataSourceBuilder` variable will configure the data source with the necessary parameters for the application. Lastly, it will builds the `DataSource` instance to return it, and it can be injected into other component where the datasource is needed.
+This class configures multiple `DataSource` beans. that is `primary` and `secondary`, these configuration used to connect to two different databases. The `@Value` injects values from the `application.properties` file into the fields, and store the configuration each properties to data source. The `@Bean(name = "primaryDataSource")` regiesters a bean for `primary` data source, and the secondary is same pattern and on another bean. `@Primary` indicates that this is the default data source when no qualifier used. The `DataSourceBuilder.create()` method will creates a new `DataSourceBuilder` instance.
 
 ## 3.2 Handle transaction when insert/update data​
 

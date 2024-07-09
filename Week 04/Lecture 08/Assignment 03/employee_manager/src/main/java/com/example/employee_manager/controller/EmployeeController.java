@@ -1,6 +1,7 @@
 package com.example.employee_manager.controller;
 
 import com.example.employee_manager.dao.EmployeeDAO;
+import com.example.employee_manager.dao.EmployeeSecondaryDAO;
 import com.example.employee_manager.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +13,15 @@ import java.util.List;
 @RequestMapping("/api/employees")
 public class EmployeeController {
 
+    private final EmployeeDAO employeeDAO;
+    private final EmployeeSecondaryDAO employeeSecondaryDAO;
+
+    // Inject the EmployeeDAO and EmployeeSecondaryDAO using constructor injection
     @Autowired
-    private EmployeeDAO employeeDAO;
+    public EmployeeController(EmployeeDAO employeeDAO, EmployeeSecondaryDAO employeeSecondaryDAO) {
+        this.employeeDAO = employeeDAO;
+        this.employeeSecondaryDAO = employeeSecondaryDAO;
+    }
 
     // Create an Employee by sending a POST request to /api/employees with the Employee object in the request body
     @PostMapping
@@ -50,5 +58,11 @@ public class EmployeeController {
     public ResponseEntity<Void> deleteEmployee(@PathVariable String id) {
         employeeDAO.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    // [Secondary Datasource] Get all Employees from the secondary database by sending a GET request to /api/employees/secondary
+    @GetMapping("/secondary")
+    public List<Employee> getAllEmployeesFromSecondary() {
+        return employeeSecondaryDAO.findAll();
     }
 }

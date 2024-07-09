@@ -8,18 +8,18 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 @Repository
-public class EmployeeDAO {
+public class EmployeeSecondaryDAO {
 
     private final JdbcTemplate jdbcTemplate;
 
-    // Inject the primaryJdbcTemplate using constructor injection
+    // Inject the secondaryJdbcTemplate using constructor injection
     @Autowired
-    public EmployeeDAO(@Qualifier("primaryJdbcTemplate") JdbcTemplate jdbcTemplate) {
+    public EmployeeSecondaryDAO(@Qualifier("secondaryJdbcTemplate") JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
