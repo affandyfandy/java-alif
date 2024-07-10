@@ -21,6 +21,7 @@
 
 ### Upload CSV File
 ![Screenshot](img/6.png)
+![Screenshot](img/7.png)
 
 ### Project Structure
 
