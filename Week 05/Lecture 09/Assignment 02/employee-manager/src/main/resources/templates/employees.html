@@ -9,16 +9,15 @@
 <div class="container">
   <h1 class="my-4">Employees</h1>
   <div class="mb-3 d-flex flex-row gap-3 justify-content-between">
-    <a href="/employees/create" class="btn btn-primary">Add New Employee</a>
+    <a href="/employees/create" class="btn btn-primary btn-sm">Add New Employee</a>
     <form action="#" th:action="@{/employees/import}" method="post" enctype="multipart/form-data" class="d-flex flex-row align-items-baseline gap-3">
       <input type="file" name="file" accept=".csv" class="form-control-file">
-      <button type="submit" class="btn btn-secondary">Upload</button>
+      <button type="submit" class="btn btn-success btn-sm">Upload</button>
     </form>
   </div>
-  <table class="table table-bordered">
-    <thead class="thead-dark">
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
     <tr>
-      <th>ID</th>
       <th>Name</th>
       <th>Date of Birth</th>
       <th>Address</th>
@@ -29,16 +28,17 @@
     </thead>
     <tbody>
     <tr th:each="employee : ${employees}">
-      <td th:text="${employee.id}"></td>
       <td th:text="${employee.name}"></td>
       <td th:text="${employee.dateOfBirth}"></td>
       <td th:text="${employee.address}"></td>
       <td th:text="${employee.department}"></td>
       <td th:text="${employee.salary}"></td>
       <td>
-        <a th:href="@{/employees/update/{id}(id=${employee.id})}" class="btn btn-sm btn-warning">Edit</a>
+        <a th:href="@{/employees/update/{id}(id=${employee.id})}" class="btn btn-sm btn-warning">Update</a>
         <form action="#" th:action="@{employees/delete/{id}(id=${employee.id})}" method="POST" class="d-inline">
-          <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+          <button type="submit" class="btn btn-sm btn-danger"
+                  onclick="if (!(confirm('Are you sure you want to delete this employee?'))) return false">
+            Delete</button>
         </form>
       </td>
     </tr>

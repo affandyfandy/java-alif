@@ -17,6 +17,7 @@
 ![Screenshot](img/5.png)
 
 **Delete**
+![Screenshot](img/8.png)
 ![Screenshot](img/1.png)
 
 ### Upload CSV File

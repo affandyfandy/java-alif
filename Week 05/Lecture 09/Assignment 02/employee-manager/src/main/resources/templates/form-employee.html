@@ -12,7 +12,7 @@
   <form action="#" th:action="@{/employees/{endpoint}(endpoint=${endpoint})}" th:object="${employee}" method="post" class="form-horizontal">
     <div class="form-group my-3" th:if="${id == null}">
       <label for="id" class="col-sm-2 control-label">Employee ID</label>
-      <input type="text" id="id" th:field="*{id}" class="form-control" required>
+      <input type="text" id="id" th:if="${id == null}" th:field="*{id}" class="form-control" required>
     </div>
     <div class="form-group my-3">
       <label for="name" class="col-sm-2 control-label">Name</label>
@@ -35,10 +35,8 @@
       <input type="text" id="salary" th:field="*{salary}" class="form-control" required>
     </div>
     <div class="form-group my-3">
-      <div class="col-sm-offset-2 col-sm-10 d-inline">
-        <button type="submit" class="btn btn-primary">Save</button>
-      </div>
-      <a href="/employees" class="btn btn-secondary d-inline">Back</a>
+        <button type="submit" class="btn btn-primary btn-sm">Save</button>
+      <a href="/employees" class="btn btn-secondary btn-sm">Back</a>
     </div>
   </form>
 </div>
