@@ -1,5 +1,6 @@
 package com.example.employee.service.impl;
 
+import com.example.employee.criteria.EmployeeSearchCriteria;
 import com.example.employee.dto.EmployeeDTO;
 import com.example.employee.dto.SalaryDTO;
 import com.example.employee.dto.TitleDTO;
@@ -8,6 +9,7 @@ import com.example.employee.repository.EmployeeRepository;
 import com.example.employee.repository.SalaryRepository;
 import com.example.employee.repository.TitleRepository;
 import com.example.employee.service.EmployeeService;
+import com.example.employee.specification.EmployeeSpecification;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -90,6 +92,19 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void deleteEmployee(Integer id) {
         employeeRepository.deleteById(id);
+    }
+
+    /**
+     * Search employees
+     * @param criteria search criteria
+     * @param pageable pagination information
+     * @return page of employee DTO
+     */
+    @Override
+    public Page<EmployeeDTO> searchEmployees(EmployeeSearchCriteria criteria, Pageable pageable) {
+        EmployeeSpecification specification = new EmployeeSpecification(criteria);
+        Page<Employee> employees = employeeRepository.findAll(specification, pageable);
+        return employees.map(this::mapToEmployeeDTO);
     }
 
     /**

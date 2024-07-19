@@ -246,6 +246,26 @@ The `updateTitle` method updates an existing job title record for an employee. I
 - **In Employee**:
     ![add-title-employee](img/add-title-employee.png)
 
+## Search employee info with dynamic criteria
+
+Using the `Specification` interface that provided by Spring Data JPA to implement the search functionality for employeees with dynamic criteria. With this `Specification` interface, it can build queries dynamically based on the given criteria. This search will returning a list of employee with `pagination`.
+
+**Query Parameters** with any combination: `firstName`, `lastName`, `gender`, `birthDateFrom`, `birthDateTo`, `title`, `minSalary`, `maxSalary`, and `departmentName`.
+
+- [EmployeeSearchCriteria.java](employee/src/main/java/com/example/employee/criteria/EmployeeSearchCriteria.java)
+
+    The `EmployeeSearchCriteria` class is used to encapsulate dynamic search parameters for querying employee information. This class has `firstName`, `lastName`, `gender`, and date ranges for `birthDate` and `hireDate` that for a dynamic search.
+
+- [EmployeeSpecification.java](employee/src/main/java/com/example/employee/specification/EmployeeSpecification.java)
+
+    The `EmployeeSpecification` class implements the `Specification` interface to do dynamic search for the `Employee` entity based on the `EmployeeSearchCriteria`. 
+    
+    The `toPredicate` method constructs a list of `Predicate` objects, it checks if the `firstName`, `lastName`, or `gender` fields are present and creates the `Predicate` objects using the `CriteriaBuilder`. This method also handles `date` ranges for `birthDate` and `hireDate`,  `salary` range (`minSalary` and `maxSalary`), and `departmentName`. These predicates are then combined using the builder and method to form a predicate used for querying the Employee entities dynamically.
+
+**Example Search Result** with query: `localhost:8080/api/v1/employees/search?firstName=john&lastName=doe&gender=M&hireDateFrom=2005-06-01`
+
+![Screenshot](img/search.png)
+
 ## POSTMAN Result For Manage Employees and Departments
 
 ### Manage Employees

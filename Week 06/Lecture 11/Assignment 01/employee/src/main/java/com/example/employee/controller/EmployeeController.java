@@ -1,5 +1,6 @@
 package com.example.employee.controller;
 
+import com.example.employee.criteria.EmployeeSearchCriteria;
 import com.example.employee.dto.EmployeeDTO;
 import com.example.employee.dto.SalaryDTO;
 import com.example.employee.dto.TitleDTO;
@@ -24,6 +25,12 @@ public class EmployeeController {
     @GetMapping
     public ResponseEntity<Page<EmployeeDTO>> getAllEmployees(Pageable pageable) {
         Page<EmployeeDTO> employees = employeeService.getAllEmployees(pageable);
+        return ResponseEntity.ok(employees);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<Page<EmployeeDTO>> searchEmployees(EmployeeSearchCriteria criteria, Pageable pageable) {
+        Page<EmployeeDTO> employees = employeeService.searchEmployees(criteria, pageable);
         return ResponseEntity.ok(employees);
     }
 
