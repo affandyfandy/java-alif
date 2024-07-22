@@ -1,4 +1,4 @@
-package com.example.employee.specification;
+package com.example.employee.repository;
 
 import com.example.employee.common.Gender;
 import com.example.employee.criteria.EmployeeSearchCriteria;
@@ -8,7 +8,6 @@ import com.example.employee.entity.Employee;
 import com.example.employee.entity.Title;
 import jakarta.persistence.criteria.*;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;

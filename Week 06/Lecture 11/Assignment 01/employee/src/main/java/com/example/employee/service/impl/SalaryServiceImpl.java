@@ -39,7 +39,7 @@ public class SalaryServiceImpl implements SalaryService {
         salary.setFromDate(salaryDTO.getFromDate());
         salary.setToDate(salaryDTO.getToDate());
         salary = salaryRepository.save(salary);
-        return mapToSalaryDTO(salary);
+        return salary.mapToSalaryDTO();
     }
 
     /**
@@ -55,19 +55,6 @@ public class SalaryServiceImpl implements SalaryService {
         salary.setSalary(salaryDTO.getSalary());
         salary.setToDate(salaryDTO.getToDate());
         salary = salaryRepository.save(salary);
-        return mapToSalaryDTO(salary);
-    }
-
-    /**
-     * Map employee DTO to employee entity
-     * @param salary salary entity
-     * @return salary DTO
-     */
-    private SalaryDTO mapToSalaryDTO(Salary salary) {
-        SalaryDTO salaryDTO = new SalaryDTO();
-        salaryDTO.setSalary(salary.getSalary());
-        salaryDTO.setFromDate(salary.getFromDate());
-        salaryDTO.setToDate(salary.getToDate());
-        return salaryDTO;
+        return salary.mapToSalaryDTO();
     }
 }

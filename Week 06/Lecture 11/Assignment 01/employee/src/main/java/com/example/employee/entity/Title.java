@@ -1,5 +1,6 @@
 package com.example.employee.entity;
 
+import com.example.employee.dto.TitleDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,6 +13,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @IdClass(TitleId.class)
 public class Title {
 
@@ -30,4 +32,12 @@ public class Title {
 
     @Column(name = "to_date")
     private LocalDate toDate;
+
+    public TitleDTO mapToTitleDTO() {
+        return TitleDTO.builder()
+                .title(this.getTitle())
+                .fromDate(this.getFromDate())
+                .toDate(this.getToDate())
+                .build();
+    }
 }

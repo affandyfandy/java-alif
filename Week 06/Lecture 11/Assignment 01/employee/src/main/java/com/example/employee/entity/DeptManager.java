@@ -1,5 +1,6 @@
 package com.example.employee.entity;
 
+import com.example.employee.dto.DeptManagerDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,6 +13,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @IdClass(DeptManagerId.class)
 public class DeptManager {
     @Id
@@ -29,4 +31,13 @@ public class DeptManager {
 
     @Column(name = "to_date")
     private LocalDate toDate;
+
+    public DeptManagerDTO mapToDeptManagerDTO() {
+        return DeptManagerDTO.builder()
+                .deptNo(this.getDepartment().getDeptNo())
+                .empNo(this.getEmployee().getEmpNo())
+                .fromDate(this.getFromDate())
+                .toDate(this.getToDate())
+                .build();
+    }
 }
