@@ -18,7 +18,7 @@ import java.util.Date;
 public class Salary {
 
     @Id
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "emp_no", nullable = false)
     private Employee employee;
 

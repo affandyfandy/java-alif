@@ -17,12 +17,12 @@ import java.util.Date;
 @IdClass(DeptManagerId.class)
 public class DeptManager {
     @Id
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "dept_no", nullable = false)
     private Department department;
 
     @Id
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "emp_no", nullable = false)
     private Employee employee;
 
