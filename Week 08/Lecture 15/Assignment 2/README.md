@@ -104,3 +104,38 @@ public class WebConfig {
 ```
 
 The `WebConfig` class is a configuration class that defines beans and their initialization. Registers the `RequestResponseApiKeyFilter` bean, ensuring the filter is available in the Spring context. The `FilterRegistrationBean` bean specifies the URL patterns that the filter should apply to all paths under `/api/v1/employees/*`.
+
+## Result
+
+After implements the application, test the system to verify that the API key validation and response header are functioning as expected. To do this, it can be use a `cURL` command to send a GET request to the Employee API endpoint, including an `"Api-Key"` header with a sample value.
+
+```log
+curl -vH "Api-Key: abc123xyz" localhost:8080/api/v1/employees
+```
+
+This `cURL` command initiates a GET request to the `/api/v1/employees` endpoint. The `-v` flag is verbose mode for detailed information about the request and response, while the `-H` flag adds a custom header, `"Api-Key: abc123xyz"` to the request.
+
+```log
+* Host localhost:8080 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:8080...
+* Connected to localhost (::1) port 8080
+> GET /api/v1/employees HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Api-Key: abc123xyz
+>
+* Request completely sent off
+< HTTP/1.1 200
+< Source: FPT Software
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Date: Mon, 29 Jul 2024 12:50:11 GMT
+<
+[{"id":1,"name":"Alice Johnson"},{"id":2,"name":"Bob Smith"},{"id":3,"name":"John"},{"id":4,"name":"Michael"}]* Connection #0 to host localhost left intact
+```
+
+In this verbose output, it includes the headers with the `Api-Key` header. The server responds with `200` status code of successful request. The response header include the custom `"Source: FPT Software"` header.
+
