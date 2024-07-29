@@ -1,6 +1,6 @@
 # Assignment 1 - Lecture 13
 
-Research about `OncePerRequestFilter` in spring boot, and give the example.
+Research about `OncePerRequestFilter` in spring boot, and give the example. [Full-Code](assignment1/src/main/java/com/example/lecture10/assignment1/)
 
 ## Example of OncePerRequestFilter
 
@@ -10,7 +10,7 @@ In this section, I'll give the example of demonstration of `OncePerRequestFilter
 
 ### Greeting Controller
 
-The `GreetingController` that demonstrates request handling.
+The `GreetingController` that demonstrates request handling. [GreetingController.java](assignment1/src/main/java/com/example/lecture10/assignment1/controller/GreetingController.java)
 
 ```java
 @Controller
@@ -35,7 +35,7 @@ This controller manages requests to `/greeting` by using `DefferedResult<String>
 
 ### CustomLoggingFilter Synchronous
 
-This `CustomLoggingFilter` operates in a synchronous context.
+This `CustomLoggingFilter` operates in a synchronous context. [CustomLoggingFilter.java](assignment1/src/main/java/com/example/lecture10/assignment1/filter/CustomLoggingFilter.java)
 
 ```java
 @Component
@@ -91,7 +91,7 @@ This log entry confirms that the `CustomLoggingFilter` is executed once for the 
 
 ### CustomLoggingFilter Asynchronous
 
-This `CustomLoggingFilter` operates in a asynchronous context. Handle where request may be dispatched multiple times due to asynchronous operations.
+This `CustomLoggingFilter` operates in a asynchronous context. Handle where request may be dispatched multiple times due to asynchronous operations. [CustomLoggingFilter.java](assignment1/src/main/java/com/example/lecture10/assignment1/filter/CustomLoggingFilter.java)
 
 ```java
 @Component
@@ -101,7 +101,7 @@ public class CustomLoggingFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilterAsyncDispatch() {
-        return true;
+        return false;
     }
 }
 ```
