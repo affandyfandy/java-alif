@@ -1,4 +1,4 @@
-package com.example.lecture10.assignment1.filter;
+package com.lecture15.assignment1.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

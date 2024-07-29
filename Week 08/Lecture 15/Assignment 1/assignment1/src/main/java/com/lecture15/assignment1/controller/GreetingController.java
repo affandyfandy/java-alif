@@ -1,4 +1,4 @@
-package com.example.lecture10.assignment1.controller;
+package com.lecture15.assignment1.controller;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
@@ -24,4 +24,3 @@ public class GreetingController {
         deferredResult.setResult("Hello, World!");
     }
 }
-
