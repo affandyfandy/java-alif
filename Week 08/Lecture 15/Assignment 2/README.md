@@ -4,6 +4,25 @@
 
 **Filters** are part of the web server and not the Spring framework. Used to intercept incoming requests, allowing manipulation or blocking requests before reach any servlet. `Filters` can also manipulate or block the responses before they are sent to the client.
 
+**Project Structure**
+
+```bash
+com/fsoft/lecture15/assignment2/
+├── Assignment2Application.java
+├── config/
+│   └── WebConfig.java
+├── controller/
+│   └── EmployeeController.java
+├── entity/
+│   ├── ApiKey.java
+│   └── Employee.java
+├── filter/
+│   └── RequestResponseApiKeyFilter.java
+└── repository/
+    └── ApiKeyRepository.java
+    └── EmployeeRepository.java
+```
+
 ### Simple Employee CRUD
 
 In this project, I've implemented a simple CRUD (Create, Read, Update, Delete) functionality for managing `Employee` data. This includes:

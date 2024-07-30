@@ -8,6 +8,17 @@ Research about `OncePerRequestFilter` in spring boot, and give the example. [Ful
 
 In this section, I'll give the example of demonstration of `OncePerRequestFilter` in Spring Boot. This filter ensures that a particular action (that is logging in this example) is executed only once for each `HTTP request`.
 
+**Project Structure**
+
+```bash
+com/lecture15/assignment1/
+├── Assignment3Application.java
+├── controller/
+│   └── GreetingController.java
+└── filter/
+    └── CustomLoggingFilter.java
+```
+
 ### Greeting Controller
 
 The `GreetingController` that demonstrates request handling. [GreetingController.java](assignment1/src/main/java/com/lecture15/assignment1/controller/GreetingController.java)

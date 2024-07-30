@@ -12,6 +12,7 @@ This project is about a simple `interceptor`. In Spring Boot, `interceptor` is a
 com/fsoft/lecture15/assignment3/
 ├── Assignment3Application.java
 ├── config/
+│   └── FilterConfig.java
 │   └── InterceptorConfig.java
 ├── controller/
 │   ├── EmployeeController.java
