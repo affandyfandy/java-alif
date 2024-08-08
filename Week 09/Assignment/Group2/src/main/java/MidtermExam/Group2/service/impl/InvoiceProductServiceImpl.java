@@ -53,13 +53,13 @@ public class InvoiceProductServiceImpl implements InvoiceProductService {
         Optional<Invoice> invoiceOpt = invoiceRepository.findById(invoiceProductDTO.getInvoiceId());
         Optional<Product> productOpt = productRepository.findById(invoiceProductDTO.getProductId());
 
+        if (invoiceOpt.isEmpty() || productOpt.isEmpty()) {
+            throw new IllegalArgumentException("Invoice or Product not found");
+        }
+
         Product product = productOpt.get();
         if (!"ACTIVE".equals(product.getStatus().name())) {
             throw new IllegalArgumentException("Product is not active");
-        }
-
-        if (invoiceOpt.isEmpty() || productOpt.isEmpty()) {
-            throw new IllegalArgumentException("Invoice or Product not found");
         }
 
         Invoice invoice = invoiceOpt.get();

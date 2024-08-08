@@ -77,6 +77,4 @@ public class CustomerServiceImpl implements CustomerService {
     public void deleteCustomer(UUID id) {
         customerRepository.deleteById(id);
     }
-
-
 }
