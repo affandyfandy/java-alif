@@ -10,7 +10,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-@Mapper(componentModel = "spring", uses = { InvoiceMapper.class, ProductMapper.class })
+@Mapper(componentModel = "spring", uses = { InvoiceMapper.class, ProductMapper.class }, injectionStrategy = org.mapstruct.InjectionStrategy.CONSTRUCTOR)
 public interface InvoiceProductMapper {
         @Mappings({
                         @Mapping(source = "invoice.id", target = "invoiceId"),

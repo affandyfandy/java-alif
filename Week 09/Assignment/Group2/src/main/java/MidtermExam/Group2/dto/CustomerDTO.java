@@ -20,7 +20,7 @@ public class CustomerDTO {
     @NotBlank(message = "Name is required")
     private String name;
 
-    @NotBlank(message = "Email is required")
+    @NotBlank(message = "Phone number is required")
     @Pattern(regexp = "^\\+62\\d{9,13}$", message = "Phone must be a valid Indonesian number starting with +62")
     private String phoneNumber;
 

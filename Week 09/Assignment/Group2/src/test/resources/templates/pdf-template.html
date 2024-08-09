@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice PDF Report</title>
+    <style>
+        body {
+            font-family: "Roboto", sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+        }
+        h1, h2, h3, h4, p {
+            margin: 0;
+            padding: 0;
+        }
+        .header, .footer {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .billed-to, .invoice-details, .payment-info {
+            margin-bottom: 20px;
+        }
+        .billed-to h4, .invoice-details h4, .payment-info h4 {
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .total {
+            text-align: right;
+            font-weight: bold;
+        }
+        .amount-due {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .payment-info p {
+            font-size: 14px;
+        }
+        .info-list {
+            display: flex;
+            justify-content: space-between;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .info-invoice {
+            float: right;
+            text-align: right;
+        }
+
+        .cust-info {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>INVOICE</h1>
+    </div>
+    <ul class="info-list">
+        <li class="info-invoice">
+            <p>Invoice # <span th:text="${invoice.invoiceId}"></span></p>
+            <p><span th:text="${invoice.invoiceDate}"></span></p>
+        </li>
+        <li class="cust-info">
+            <h4>BILLED TO:</h4>
+            <p>ID: <span th:text="${customer.id}"></span></p>
+            <p>Name: <span th:text="${customer.name}"></span></p>
+        </li>
+    </ul>
+    <div class="invoice-details">
+        <h4>Invoice Details:</h4>
+        <table>
+            <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${items}">
+                <td th:text="${item.productName}"></td>
+                <td th:text="${item.quantity}"></td>
+                <td th:text="${item.price}"></td>
+                <td th:text="${item.amount}"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3" class="total amount-due">Total</td>
+                <td th:text="${invoice.invoiceAmount}"></td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+</body>
+</html>
