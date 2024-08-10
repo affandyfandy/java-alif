@@ -216,7 +216,6 @@ public class InvoiceProductServiceTest {
      */
     @Test
     void testEditInvoiceProduct_ReturnInvoiceProductDTO() {
-        InvoiceProductDTO invoiceProductDTO = new InvoiceProductDTO();
         invoiceProductDTO.setQuantity(2);
 
         when(invoiceProductRepository.findById(any())).thenReturn(Optional.of(invoiceProduct));

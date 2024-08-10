@@ -7,6 +7,7 @@ import MidtermExam.Group2.dto.InvoiceListDTO;
 import MidtermExam.Group2.entity.Invoice;
 import MidtermExam.Group2.entity.Customer;
 import MidtermExam.Group2.entity.Invoice;
+import MidtermExam.Group2.exception.InvoiceNotFoundException;
 import MidtermExam.Group2.mapper.InvoiceMapper;
 import MidtermExam.Group2.repository.CustomerRepository;
 import MidtermExam.Group2.repository.InvoiceRepository;
@@ -116,7 +117,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         if (invoiceOpt.isPresent()) {
             return invoiceMapper.toInvoiceDetailDTO(invoiceOpt.get());
         } else {
-            throw new RuntimeException("Invoice not found");
+            throw new InvoiceNotFoundException("Invoice not found");
         }
     }
 }

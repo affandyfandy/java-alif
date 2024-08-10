@@ -60,7 +60,6 @@ public class CustomerServiceTest {
     void testGetAllCustomers_ReturnPageOfOneCustomer() {
         Pageable pageable = PageRequest.of(0, 1);
         Page<Customer> customerPage = new PageImpl<>(List.of(customer));
-        Page<CustomerDTO> customerDTOPage = new PageImpl<>(List.of(customerDTO));
 
         Mockito.when(customerRepository.findAll(pageable)).thenReturn(customerPage);
         Mockito.when(customerMapper.toDTO(customer)).thenReturn(customerDTO);

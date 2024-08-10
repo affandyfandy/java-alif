@@ -4,6 +4,7 @@ import MidtermExam.Group2.criteria.InvoiceSearchCriteria;
 import MidtermExam.Group2.dto.InvoiceDTO;
 import MidtermExam.Group2.dto.InvoiceDetailDTO;
 import MidtermExam.Group2.dto.InvoiceListDTO;
+import MidtermExam.Group2.exception.PdfGenerationException;
 import MidtermExam.Group2.service.ExportService;
 import MidtermExam.Group2.service.InvoiceService;
 import MidtermExam.Group2.service.PdfService;
@@ -115,8 +116,8 @@ public class InvoiceController {
                     while ((bytesRead = is.read(buffer)) != -1) {
                         outputStream.write(buffer, 0, bytesRead);
                     }
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
+                } catch (PdfGenerationException e) {
+                    throw new IOException("An error occurred while generating PDF", e);
                 }
             };
 

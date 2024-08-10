@@ -57,8 +57,4 @@ public class Product {
     public void preUpdate() {
         updatedTime = LocalDateTime.now();
     }
-
-    // @OneToMany(fetch = FetchType.LAZY, mappedBy = "products", cascade =
-    // CascadeType.ALL)
-    // private List<InvoiceProduct> invoiceProducts = new ArrayList<>();
 }

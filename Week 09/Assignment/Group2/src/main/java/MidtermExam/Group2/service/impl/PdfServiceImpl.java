@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import MidtermExam.Group2.dto.InvoiceDetailDTO;
+import MidtermExam.Group2.exception.PdfGenerationException;
 import MidtermExam.Group2.service.PdfService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,14 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 @Transactional
 public class PdfServiceImpl implements PdfService {
 
-    @Autowired
-    private TemplateEngine templateEngine;
+    private final TemplateEngine templateEngine;
 
-    public InputStream generatePdf(InvoiceDetailDTO invoiceDetail) throws Exception {
+    @Autowired
+    public PdfServiceImpl(TemplateEngine templateEngine) {
+        this.templateEngine = templateEngine;
+    }
+
+    public InputStream generatePdf(InvoiceDetailDTO invoiceDetail) throws PdfGenerationException {
         Map<String, Object> data = new HashMap<>();
         data.put("invoice", invoiceDetail);
         data.put("customer", invoiceDetail.getCustomer());
@@ -38,8 +43,13 @@ public class PdfServiceImpl implements PdfService {
         ITextRenderer renderer = new ITextRenderer();
         renderer.setDocumentFromString(htmlContent);
         renderer.layout();
-        renderer.createPDF(outputStream, false);
-        renderer.finishPDF();
+        try {
+            renderer.createPDF(outputStream, false);
+        } catch (Exception e) {
+            throw new PdfGenerationException("An error occurred while generating PDF", e);
+        } finally {
+            renderer.finishPDF();
+        }
 
         return new ByteArrayInputStream(outputStream.toByteArray());
     }

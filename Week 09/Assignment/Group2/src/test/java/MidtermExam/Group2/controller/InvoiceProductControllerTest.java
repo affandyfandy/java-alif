@@ -87,8 +87,6 @@ public class InvoiceProductControllerTest {
         UUID invoiceId = invoiceProductDTO.getInvoiceId();
         UUID productId = invoiceProductDTO.getProductId();
 
-        InvoiceProductDTO updatedInvoiceProductDto = new InvoiceProductDTO(invoiceId, productId, "Product A", 15, new BigDecimal(1500));
-
         when(invoiceProductService.editInvoiceProduct(invoiceProductDTO, invoiceId, productId)).thenReturn(invoiceProductDTO);
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/invoice-products/" + invoiceId + "/" + productId)

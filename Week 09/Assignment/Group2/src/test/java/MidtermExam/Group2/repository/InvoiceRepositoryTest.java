@@ -133,12 +133,6 @@ public class InvoiceRepositoryTest {
         // Given: saving the invoice, customer, product, and invoice product
         invoiceRepository.save(this.invoice);
 
-        Customer customer = new Customer();
-        customer.setName("Alif T");
-        customer.setPhoneNumber("+6281234567890");
-        customer.setStatus(Status.ACTIVE);
-        customerRepository.save(customer);
-
         Product product = new Product();
         product.setName("Product A");
         product.setPrice(new BigDecimal(1000));
@@ -163,7 +157,6 @@ public class InvoiceRepositoryTest {
         assertThat(invoices).contains(this.invoice);
     }
 
-    // method: Invoice findInvoiceById(UUID id);
     // JUnit Test for find invoice by id operation
     @Test
     void givenInvoiceId_whenFindInvoiceByIdQuery_thenReturnInvoice() {
@@ -203,7 +196,6 @@ public class InvoiceRepositoryTest {
         assertThat(foundInvoice).isEqualTo(savedInvoice);
     }
 
-    // method: List<Invoice> findByCustomerAndDate(@Param("customerId") UUID customerId, @Param("month") Integer month, @Param("year") Integer year)
     // JUnit Test for find invoices by customer id and date operation
     @Test
     void givenCustomerIdMonthYear_whenFindByCustomerAndDate_thenReturnInvoiceList() {
@@ -222,7 +214,6 @@ public class InvoiceRepositoryTest {
         assertThat(foundInvoices).hasSize(1);
     }
 
-    // method: List<Invoice> findByCustomerId(UUID customerId);
     // JUnit Test for find invoices by customer id operation
     @Test
     void givenCustomerId_whenFindByCustomerId_thenReturnInvoiceList() {
@@ -239,7 +230,6 @@ public class InvoiceRepositoryTest {
         assertThat(foundInvoices).hasSize(1);
     }
 
-    // method: BigDecimal calculateTotalRevenueByDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime);
     // JUnit Test for calculate total revenue by date time operation
     @Test
     void givenStartDateTimeEndDateTime_whenCalculateTotalRevenueByDateTime_thenReturnTotalRevenue() {

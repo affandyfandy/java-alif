@@ -16,6 +16,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -258,7 +259,9 @@ public class InvoiceServiceTest {
 
         when(invoiceRepository.findById(invoice.getId())).thenReturn(Optional.of(invoice));
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> invoiceService.editInvoice(invoice.getId(), invoiceDTO));
+        Executable executable = () -> invoiceService.editInvoice(invoice.getId(), invoiceDTO);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, executable);
 
         assertThat(exception.getMessage()).isEqualTo("Invoice cannot be edited after 10 minutes");
     }
@@ -273,7 +276,9 @@ public class InvoiceServiceTest {
         when(invoiceRepository.findById(invoice.getId())).thenReturn(Optional.of(invoice));
         when(customerRepository.findById(customer.getId())).thenReturn(Optional.empty());
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> invoiceService.editInvoice(invoice.getId(), invoiceDTO));
+        Executable executable = () -> invoiceService.editInvoice(invoice.getId(), invoiceDTO);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, executable);
 
         assertThat(exception.getMessage()).isEqualTo("Customer not found");
     }
@@ -289,7 +294,9 @@ public class InvoiceServiceTest {
         when(invoiceRepository.findById(invoice.getId())).thenReturn(Optional.of(invoice));
         when(customerRepository.findById(customer.getId())).thenReturn(Optional.of(customer));
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> invoiceService.editInvoice(invoice.getId(), invoiceDTO));
+        Executable executable = () -> invoiceService.editInvoice(invoice.getId(), invoiceDTO);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, executable);
 
         assertThat(exception.getMessage()).isEqualTo("Customer is inactive");
     }
