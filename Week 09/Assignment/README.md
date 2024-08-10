@@ -18,10 +18,13 @@
 
 2. **Write Unit Tests**: Create test classes for services, controllers, and repositories in the `src/test/java` directory. Use `@Test` to create test methods within the test classes, `@MockBean` for mocking dependencies, `@SpyBean` for partial mocks where needed, and other needed methods.
 
-3. **Run Tests and Check Coverage**: Ensuring the unit tests cover at least 75% of the code.
-
-4. **Test Result**:
+3. **Test Result**:
+    \
     ![Test Result](img/test%20result.png)
+
+4. **Coverage in Intellij IDEA**:
+    \
+    ![Intellij IDEA Coverage](img/intellij-coverage.png)
 
 ## 2. Installing and Configuring SonarLint
 
