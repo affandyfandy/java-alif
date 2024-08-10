@@ -10,7 +10,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ import java.util.Optional;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {CustomerServiceImpl.class})
-public class CustomerServiceTest {
+class CustomerServiceTest {
 
     @Autowired
     private CustomerServiceImpl customerService;

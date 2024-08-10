@@ -6,17 +6,14 @@ import MidtermExam.Group2.repository.InvoiceRepository;
 import MidtermExam.Group2.service.ExportService;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
@@ -128,7 +125,7 @@ public class ExportServiceImpl implements ExportService {
         leftAlignStyle.setAlignment(HorizontalAlignment.LEFT);
 
         Row invoiceRow = sheet.createRow(rowNum++);
-        invoiceRow.createCell(0).setCellValue(rowNum - 1);
+        invoiceRow.createCell(0).setCellValue((double) rowNum - 1);
         invoiceRow.createCell(1).setCellValue(invoice.getId().toString());
         invoiceRow.createCell(2).setCellValue(invoice.getInvoiceDate().format(DateTimeFormatter.ofPattern("MMMM dd, yyyy HH:mm:ss")));
         invoiceRow.createCell(3).setCellValue(invoice.getInvoiceAmount().doubleValue());
@@ -142,7 +139,7 @@ public class ExportServiceImpl implements ExportService {
                 invoiceRow = sheet.createRow(rowNum++);
             }
 
-            invoiceRow.createCell(0).setCellValue(rowNum - 1);
+            invoiceRow.createCell(0).setCellValue((double) rowNum - 1);
             invoiceRow.createCell(6).setCellValue(product.getProduct().getId().toString());
             invoiceRow.createCell(7).setCellValue(product.getProduct().getName());
             invoiceRow.createCell(8).setCellValue(product.getProduct().getPrice().doubleValue());

@@ -16,7 +16,6 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
@@ -24,13 +23,12 @@ import java.util.Collections;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {PdfServiceImpl.class})
-public class PdfServiceTest {
+class PdfServiceTest {
 
     @Autowired
     private PdfServiceImpl pdfService;
@@ -63,7 +61,7 @@ public class PdfServiceTest {
         assertThat(result).isNotNull();
 
         byte[] pdfBytes = result.readAllBytes();
-        assertThat(pdfBytes.length).isGreaterThan(0);
+        assertThat(pdfBytes).isNotEmpty();
 
         // verify PDF content if needed
         ITextRenderer renderer = new ITextRenderer();

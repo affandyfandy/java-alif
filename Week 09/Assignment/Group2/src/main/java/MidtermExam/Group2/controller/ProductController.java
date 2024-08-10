@@ -46,7 +46,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createProduct(@Valid @RequestBody ProductDTO productDTO, BindingResult result) {
+    public ResponseEntity<Object> createProduct(@Valid @RequestBody ProductDTO productDTO, BindingResult result) {
         if (result.hasErrors()) {
             return ResponseEntity.badRequest().body("Validation error: " + result.getAllErrors());
         }

@@ -5,6 +5,7 @@ import MidtermExam.Group2.dto.InvoiceDTO;
 import MidtermExam.Group2.dto.InvoiceDetailDTO;
 import MidtermExam.Group2.dto.InvoiceListDTO;
 import MidtermExam.Group2.entity.*;
+import MidtermExam.Group2.exception.InvoiceNotFoundException;
 import MidtermExam.Group2.mapper.CustomerMapper;
 import MidtermExam.Group2.mapper.InvoiceMapper;
 import MidtermExam.Group2.mapper.InvoiceProductMapper;
@@ -12,14 +13,10 @@ import MidtermExam.Group2.repository.CustomerRepository;
 import MidtermExam.Group2.repository.InvoiceRepository;
 import MidtermExam.Group2.repository.InvoiceSpecification;
 import MidtermExam.Group2.service.impl.InvoiceServiceImpl;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.function.Executable;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -31,7 +28,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -45,7 +41,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {InvoiceServiceImpl.class})
-public class InvoiceServiceTest {
+class InvoiceServiceTest {
 
     @Autowired
     private InvoiceServiceImpl invoiceService;
@@ -157,8 +153,9 @@ public class InvoiceServiceTest {
 
         InvoiceDTO result = invoiceService.getInvoiceById(id);
 
-        assertThat(result).isNotNull();
-        assertThat(result).isEqualTo(invoiceDTO);
+        assertThat(result)
+                .isNotNull()
+                .isEqualTo(invoiceDTO);
     }
 
     /**
@@ -170,7 +167,7 @@ public class InvoiceServiceTest {
 
         when(invoiceRepository.findById(id)).thenReturn(Optional.empty());
 
-        Exception exception =  assertThrows(IllegalArgumentException.class, () -> invoiceService.getInvoiceById(id));
+        Exception exception =  assertThrows(InvoiceNotFoundException.class, () -> invoiceService.getInvoiceById(id));
 
         assertThat(exception.getMessage()).isEqualTo("Invoice not found");
     }
@@ -188,8 +185,9 @@ public class InvoiceServiceTest {
         InvoiceDTO result = invoiceService.addInvoice(invoiceDTO);
         System.out.println(result);
 
-        assertThat(result).isNotNull();
-        assertThat(result).isEqualTo(invoiceDTO);
+        assertThat(result)
+                .isNotNull()
+                .isEqualTo(invoiceDTO);
     }
 
     /**
@@ -232,8 +230,9 @@ public class InvoiceServiceTest {
 
         InvoiceDTO result = invoiceService.editInvoice(invoice.getId(), invoiceDTO);
 
-        assertThat(result).isNotNull();
-        assertThat(result).isEqualTo(invoiceDTO);
+        assertThat(result)
+                .isNotNull()
+                .isEqualTo(invoiceDTO);
     }
 
     /**
@@ -245,7 +244,7 @@ public class InvoiceServiceTest {
 
         when(invoiceRepository.findById(id)).thenReturn(Optional.empty());
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> invoiceService.editInvoice(id, invoiceDTO));
+        Exception exception = assertThrows(InvoiceNotFoundException.class, () -> invoiceService.editInvoice(id, invoiceDTO));
 
         assertThat(exception.getMessage()).isEqualTo("Invoice not found");
     }
@@ -313,8 +312,9 @@ public class InvoiceServiceTest {
 
         InvoiceDetailDTO result = invoiceService.getInvoiceDetail(id);
 
-        assertThat(result).isNotNull();
-        assertThat(result).isEqualTo(invoiceDetailDTO);
+        assertThat(result)
+                .isNotNull()
+                .isEqualTo(invoiceDetailDTO);
     }
 
     /**

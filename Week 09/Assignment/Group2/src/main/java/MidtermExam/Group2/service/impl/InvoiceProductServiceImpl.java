@@ -3,7 +3,6 @@ package MidtermExam.Group2.service.impl;
 import MidtermExam.Group2.dto.InvoiceProductDTO;
 import MidtermExam.Group2.entity.InvoiceProduct;
 import MidtermExam.Group2.entity.InvoiceProductId;
-import MidtermExam.Group2.entity.InvoiceProduct;
 import MidtermExam.Group2.mapper.InvoiceProductMapper;
 import MidtermExam.Group2.repository.InvoiceProductRepository;
 import MidtermExam.Group2.repository.InvoiceRepository;

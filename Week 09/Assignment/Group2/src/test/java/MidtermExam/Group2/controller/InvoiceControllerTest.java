@@ -5,6 +5,7 @@ import MidtermExam.Group2.dto.CustomerDTO;
 import MidtermExam.Group2.dto.InvoiceDTO;
 import MidtermExam.Group2.dto.InvoiceDetailDTO;
 import MidtermExam.Group2.dto.InvoiceListDTO;
+import MidtermExam.Group2.exception.PdfGenerationException;
 import MidtermExam.Group2.service.ExportService;
 import MidtermExam.Group2.service.InvoiceService;
 import MidtermExam.Group2.service.PdfService;
@@ -24,6 +25,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collections;
@@ -33,7 +35,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @WebMvcTest(controllers = InvoiceController.class)
-public class InvoiceControllerTest {
+class InvoiceControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -161,6 +163,19 @@ public class InvoiceControllerTest {
     }
 
     @Test
+    void testExportInvoiceToExcel_Failed() throws Exception {
+        UUID id = invoiceDTO.getCustomerId();
+        when(exportService.exportInvoicesToExcel(id, 7, 5)).thenThrow(new IOException("Failed to export invoices to Excel"));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/invoices/excel")
+                .param("customerId", id.toString())
+                .param("month", "7")
+                .param("year", "5"))
+                .andExpect(MockMvcResultMatchers.status().isInternalServerError())
+                .andExpect(MockMvcResultMatchers.content().string("Failed to export invoices to Excel"));
+    }
+
+    @Test
     void testGenerateInvoicePdf() throws Exception {
         UUID id = invoiceDTO.getId();
         when(invoiceService.getInvoiceDetail(id)).thenReturn(invoiceDetailDTO);
@@ -171,5 +186,16 @@ public class InvoiceControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("application/pdf"))
                 .andExpect(MockMvcResultMatchers.header().string(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=invoice.pdf"));
+    }
+
+    @Test
+    void testGenerateInvoicePdf_Failed() throws Exception {
+        UUID id = invoiceDTO.getId();
+        when(invoiceService.getInvoiceDetail(id)).thenReturn(invoiceDetailDTO);
+        when(pdfService.generatePdf(invoiceDetailDTO)).thenThrow(new PdfGenerationException("Failed to generate PDF"));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/invoices/{id}/pdf", id)
+                .contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.content().string(""));
     }
 }

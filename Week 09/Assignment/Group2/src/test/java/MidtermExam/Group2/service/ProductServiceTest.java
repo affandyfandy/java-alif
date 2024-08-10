@@ -6,8 +6,6 @@ import MidtermExam.Group2.entity.Status;
 import MidtermExam.Group2.mapper.ProductMapper;
 import MidtermExam.Group2.repository.ProductRepository;
 import MidtermExam.Group2.service.impl.ProductServiceImpl;
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,7 +36,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {ProductServiceImpl.class})
-public class ProductServiceTest {
+class ProductServiceTest {
     @Autowired
     private ProductServiceImpl productService;
 
@@ -84,8 +82,9 @@ public class ProductServiceTest {
 
         Page<ProductDTO> result = productService.getAllProducts(pageable);
 
-        assertThat(result).isNotNull();
-        assertThat(result).isNotEmpty();
+        assertThat(result)
+                .isNotNull()
+                .isNotEmpty();
         assertThat(result.getContent()).hasSize(1);
         assertThat(result.getContent().get(0)).isEqualTo(productDTO);
 
@@ -103,8 +102,9 @@ public class ProductServiceTest {
 
         ProductDTO result = productService.getProductById(productId).get();
 
-        assertThat(result).isNotNull();
-        assertThat(result).isEqualTo(productDTO);
+        assertThat(result)
+                .isNotNull()
+                .isEqualTo(productDTO);
 
         verify(productRepository).findById(productId);
         verify(productMapper).toDTO(product);
@@ -133,8 +133,9 @@ public class ProductServiceTest {
 
         ProductDTO result = productService.createProduct(productDTO);
 
-        assertThat(result).isNotNull();
-        assertThat(result).isEqualTo(productDTO);
+        assertThat(result)
+                .isNotNull()
+                .isEqualTo(productDTO);
 
         verify(productMapper).toEntity(productDTO);
         verify(productRepository).save(product);
@@ -159,8 +160,9 @@ public class ProductServiceTest {
 
         Optional<ProductDTO> result = productService.updateProduct(productId, updatedProductDTO);
 
-        assertThat(result).isPresent();
-        assertThat(result.get()).isEqualTo(updatedProductDTO);
+        assertThat(result)
+                .isPresent()
+                .contains(updatedProductDTO);
 
         verify(productRepository).findById(productId);
         verify(productRepository).save(product);
@@ -190,8 +192,9 @@ public class ProductServiceTest {
 
         Optional<ProductDTO> result = productService.toggleProductStatus(productId);
 
-        assertThat(result).isPresent();
-        assertThat(result.get()).isEqualTo(productDTO);
+        assertThat(result)
+                .isPresent()
+                .contains(productDTO);
 
         verify(productRepository).findById(productId);
         verify(productRepository).save(product);
@@ -238,7 +241,7 @@ public class ProductServiceTest {
      * Method under test: {@link ProductServiceImpl#importProductsFromCsv(MultipartFile)}
      */
     @Test
-    void testImportProductsFromCsv() throws IOException, CsvException {
+    void testImportProductsFromCsv() throws IOException {
         String csvContent = "Product A,10.00,ACTIVE";
         MockMultipartFile multipartFile = new MockMultipartFile("file", "products.csv", "text/csv", new ByteArrayInputStream(csvContent.getBytes(StandardCharsets.UTF_8)));
 
@@ -261,7 +264,7 @@ public class ProductServiceTest {
      * Method under test: {@link ProductServiceImpl#importProductsFromCsv(MultipartFile)}
      */
     @Test
-    void testImportProductsFromCsv_InvalidCsv() throws IOException, CsvException {
+    void testImportProductsFromCsv_InvalidCsv() throws IOException {
         MultipartFile multipartFile = mock(MultipartFile.class);
 
         when(multipartFile.getInputStream()).thenThrow(new IOException());
@@ -286,8 +289,9 @@ public class ProductServiceTest {
 
         Page<ProductDTO> result = productService.searchProducts("Product A", Status.ACTIVE, pageable);
 
-        assertThat(result).isNotNull();
-        assertThat(result).isNotEmpty();
+        assertThat(result)
+                .isNotNull()
+                .isNotEmpty();
         assertThat(result.getContent()).hasSize(1);
         assertThat(result.getContent().get(0)).isEqualTo(productDTO);
 
@@ -311,8 +315,9 @@ public class ProductServiceTest {
 
         Page<ProductDTO> result = productService.searchProducts("Product A", null, pageable);
 
-        assertThat(result).isNotNull();
-        assertThat(result).isNotEmpty();
+        assertThat(result)
+                .isNotNull()
+                .isNotEmpty();
         assertThat(result.getContent()).hasSize(1);
         assertThat(result.getContent().get(0)).isEqualTo(productDTO);
 
@@ -336,8 +341,9 @@ public class ProductServiceTest {
 
         Page<ProductDTO> result = productService.searchProducts(null, Status.ACTIVE, pageable);
 
-        assertThat(result).isNotNull();
-        assertThat(result).isNotEmpty();
+        assertThat(result)
+                .isNotNull()
+                .isNotEmpty();
         assertThat(result.getContent()).hasSize(1);
         assertThat(result.getContent().get(0)).isEqualTo(productDTO);
 
@@ -361,8 +367,9 @@ public class ProductServiceTest {
 
         Page<ProductDTO> result = productService.searchProducts(null, null, pageable);
 
-        assertThat(result).isNotNull();
-        assertThat(result).isNotEmpty();
+        assertThat(result)
+                .isNotNull()
+                .isNotEmpty();
         assertThat(result.getContent()).hasSize(1);
         assertThat(result.getContent().get(0)).isEqualTo(productDTO);
 

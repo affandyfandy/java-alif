@@ -13,8 +13,6 @@ import jakarta.validation.Valid;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,8 +23,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
-
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/invoices")
@@ -48,44 +44,26 @@ public class InvoiceController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getInvoiceDetail(@PathVariable("id") UUID invoiceId) {
-        try {
-            InvoiceDetailDTO invoiceDetail = invoiceService.getInvoiceDetail(invoiceId);
-            return new ResponseEntity<>(invoiceDetail, HttpStatus.OK);
-        } catch (RuntimeException e) {
-            Map<String, String> response = new HashMap<>();
-            response.put("errors", e.getMessage());
-            return ResponseEntity.badRequest().body(response);
-        }
+    public ResponseEntity<InvoiceDetailDTO> getInvoiceDetail(@PathVariable("id") UUID invoiceId) {
+        InvoiceDetailDTO invoiceDetail = invoiceService.getInvoiceDetail(invoiceId);
+        return new ResponseEntity<>(invoiceDetail, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<?> addInvoice(@Valid @RequestBody InvoiceDTO invoiceDTO) {
-        try {
-            InvoiceDTO addedInvoice = invoiceService.addInvoice(invoiceDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body(addedInvoice);
-        } catch (RuntimeException e) {
-            Map<String, String> response = new HashMap<>();
-            response.put("errors", e.getMessage());
-            return ResponseEntity.badRequest().body(response);
-        }
+    public ResponseEntity<InvoiceDTO> addInvoice(@Valid @RequestBody InvoiceDTO invoiceDTO) {
+        InvoiceDTO addedInvoice = invoiceService.addInvoice(invoiceDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(addedInvoice);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> editInvoice(@PathVariable("id") UUID id,
+    public ResponseEntity<InvoiceDTO> editInvoice(@PathVariable("id") UUID id,
             @Valid @RequestBody InvoiceDTO invoiceDTO) {
-        try {
-            InvoiceDTO editedInvoice = invoiceService.editInvoice(id, invoiceDTO);
-            return ResponseEntity.ok(editedInvoice);
-        } catch (RuntimeException e) {
-            Map<String, String> response = new HashMap<>();
-            response.put("errors", e.getMessage());
-            return ResponseEntity.badRequest().body(response);
-        }
+        InvoiceDTO editedInvoice = invoiceService.editInvoice(id, invoiceDTO);
+        return ResponseEntity.ok(editedInvoice);
     }
 
     @GetMapping("/excel")
-    public ResponseEntity<?> exportInvoicesToExcel(@RequestParam(required = false) UUID customerId,
+    public ResponseEntity<Object> exportInvoicesToExcel(@RequestParam(required = false) UUID customerId,
                                                    @RequestParam(required = false) Integer month,
                                                    @RequestParam(required = false) Integer year) {
         try {

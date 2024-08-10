@@ -3,12 +3,8 @@ package MidtermExam.Group2.mapper;
 import MidtermExam.Group2.dto.CustomerDTO;
 import MidtermExam.Group2.entity.Customer;
 import MidtermExam.Group2.entity.Status;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -16,12 +12,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = CustomerMapper.class)
-public class CustomerMapperTest {
+class CustomerMapperTest {
     @MockBean
     private CustomerMapper customerMapper;
 

@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import static org.mockito.Mockito.when;
 
 @WebMvcTest(controllers = RevenueController.class)
-public class RevenueControllerTest {
+class RevenueControllerTest {
     @Autowired
     private MockMvc mockMvc;
 

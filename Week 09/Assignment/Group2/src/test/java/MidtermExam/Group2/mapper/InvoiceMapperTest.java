@@ -8,20 +8,15 @@ import MidtermExam.Group2.entity.Customer;
 import MidtermExam.Group2.entity.Invoice;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
 
-public class InvoiceMapperTest {
+class InvoiceMapperTest {
 
     private InvoiceMapper invoiceMapper;
     private CustomerMapper customerMapper;

@@ -10,7 +10,6 @@ import MidtermExam.Group2.service.impl.InvoiceProductServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -34,7 +33,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {InvoiceProductServiceImpl.class})
-public class InvoiceProductServiceTest {
+class InvoiceProductServiceTest {
     @Autowired
     private InvoiceProductServiceImpl invoiceProductService;
 

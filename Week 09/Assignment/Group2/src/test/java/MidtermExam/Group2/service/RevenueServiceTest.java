@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {RevenueServiceImpl.class})
-public class RevenueServiceTest {
+class RevenueServiceTest {
     @Autowired
     private RevenueServiceImpl revenueServiceImpl;
 

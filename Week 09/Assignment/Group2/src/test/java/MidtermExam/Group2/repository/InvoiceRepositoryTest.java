@@ -4,12 +4,9 @@ import MidtermExam.Group2.entity.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -25,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-public class InvoiceRepositoryTest {
+class InvoiceRepositoryTest {
     @Autowired
     private InvoiceRepository invoiceRepository;
 
@@ -64,8 +61,9 @@ public class InvoiceRepositoryTest {
 
         // Then: the saved invoice should be the same as the invoice
         Optional<Invoice> foundInvoice = invoiceRepository.findById(savedInvoice.getId());
-        assertThat(foundInvoice).isPresent();
-        assertThat(foundInvoice.get()).isEqualTo(savedInvoice);
+        assertThat(foundInvoice)
+                .isPresent()
+                .contains(savedInvoice);
     }
 
     // JUnit Test for find all invoices operation
@@ -78,9 +76,10 @@ public class InvoiceRepositoryTest {
         List<Invoice> invoices = invoiceRepository.findAll();
 
         // Then: the list of invoices should contain the saved invoice, not be empty, and have a size of 1
-        assertThat(invoices).isNotEmpty();
-        assertThat(invoices).contains(savedInvoice);
-        assertThat(invoices).hasSize(1);
+        assertThat(invoices)
+                .isNotEmpty()
+                .contains(savedInvoice)
+                .hasSize(1);
     }
 
     // JUnit Test for find invoice by id operation
@@ -94,8 +93,9 @@ public class InvoiceRepositoryTest {
         Optional<Invoice> foundInvoice = invoiceRepository.findById(invoiceId);
 
         // Then: the found invoice should be the same as the saved invoice
-        assertThat(foundInvoice).isPresent();
-        assertThat(foundInvoice.get()).isEqualTo(savedInvoice);
+        assertThat(foundInvoice)
+                .isPresent()
+                .contains(savedInvoice);
     }
 
     // JUnit Test for update invoice operation
@@ -109,8 +109,9 @@ public class InvoiceRepositoryTest {
         Invoice updatedInvoice = invoiceRepository.save(savedInvoice);
 
         // Then: the updated invoice should not be null and equal to the saved invoice
-        assertThat(updatedInvoice).isNotNull();
-        assertThat(updatedInvoice).isEqualTo(savedInvoice);
+        assertThat(updatedInvoice)
+                .isNotNull()
+                .isEqualTo(savedInvoice);
     }
 
     // JUnit Test for delete invoice operation
@@ -152,9 +153,10 @@ public class InvoiceRepositoryTest {
         Page<Invoice> invoices = invoiceRepository.findAll(pageable);
 
         // Then
-        assertThat(invoices).isNotEmpty();
-        assertThat(invoices).hasSize(1);
-        assertThat(invoices).contains(this.invoice);
+        assertThat(invoices)
+                .isNotEmpty()
+                .hasSize(1)
+                .contains(this.invoice);
     }
 
     // JUnit Test for find invoice by id operation
@@ -162,12 +164,6 @@ public class InvoiceRepositoryTest {
     void givenInvoiceId_whenFindInvoiceByIdQuery_thenReturnInvoice() {
         // Given: saving the invoice and retrieving the ID
         Invoice savedInvoice = invoiceRepository.save(this.invoice);
-
-        Customer customer = new Customer();
-        customer.setName("Alif T");
-        customer.setPhoneNumber("+6281234567890");
-        customer.setStatus(Status.ACTIVE);
-        customerRepository.save(customer);
 
         Product product = new Product();
         product.setName("Product A");
@@ -209,9 +205,10 @@ public class InvoiceRepositoryTest {
         List<Invoice> foundInvoices = invoiceRepository.findByCustomerAndDate(customerId, month, year);
 
         // Then: the found invoices should not be empty, contain the saved invoice, and have a size of 1
-        assertThat(foundInvoices).isNotEmpty();
-        assertThat(foundInvoices).contains(savedInvoice);
-        assertThat(foundInvoices).hasSize(1);
+        assertThat(foundInvoices)
+                .isNotEmpty()
+                .contains(savedInvoice)
+                .hasSize(1);
     }
 
     // JUnit Test for find invoices by customer id operation
@@ -225,9 +222,10 @@ public class InvoiceRepositoryTest {
         List<Invoice> foundInvoices = invoiceRepository.findByCustomerId(customerId);
 
         // Then: the found invoices should not be empty, contain the saved invoice, and have a size of 1
-        assertThat(foundInvoices).isNotEmpty();
-        assertThat(foundInvoices).contains(savedInvoice);
-        assertThat(foundInvoices).hasSize(1);
+        assertThat(foundInvoices)
+                .isNotEmpty()
+                .contains(savedInvoice)
+                .hasSize(1);
     }
 
     // JUnit Test for calculate total revenue by date time operation
@@ -242,7 +240,8 @@ public class InvoiceRepositoryTest {
         BigDecimal totalRevenue = invoiceRepository.calculateTotalRevenueByDateTime(startDateTime, endDateTime);
 
         // Then: the total revenue should not be null and equal to the invoice amount
-        assertThat(totalRevenue).isNotNull();
-        assertThat(totalRevenue).isEqualTo(savedInvoice.getInvoiceAmount().setScale(2));
+        assertThat(totalRevenue)
+                .isNotNull()
+                .isEqualTo(savedInvoice.getInvoiceAmount().setScale(2));
     }
 }

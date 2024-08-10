@@ -24,7 +24,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @WebMvcTest(controllers = InvoiceProductController.class)
-public class InvoiceProductControllerTest {
+class InvoiceProductControllerTest {
     @Autowired
     private MockMvc mockMvc;
 

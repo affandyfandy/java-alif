@@ -8,7 +8,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -21,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-public class ProductRepositoryTest {
+class ProductRepositoryTest {
     @Autowired
     private ProductRepository productRepository;
 
@@ -55,9 +54,10 @@ public class ProductRepositoryTest {
         List<Product> products = productRepository.findAll();
 
         // Then: the product list should not be empty
-        assertThat(products).isNotEmpty();
-        assertThat(products).contains(savedProduct);
-        assertThat(products).hasSize(1);
+        assertThat(products)
+                .isNotEmpty()
+                .contains(savedProduct)
+                .hasSize(1);
     }
 
     // JUnit Test for find product by id operation
@@ -70,8 +70,9 @@ public class ProductRepositoryTest {
         Optional<Product> foundProduct = productRepository.findById(savedProduct.getId());
 
         // Then: the found product should be the same as the saved product
-        assertThat(foundProduct).isPresent();
-        assertThat(foundProduct.get()).isEqualTo(savedProduct);
+        assertThat(foundProduct)
+                .isPresent()
+                .contains(savedProduct);
     }
 
     // JUnit Test for update product operation
@@ -113,9 +114,10 @@ public class ProductRepositoryTest {
         Page<Product> products = productRepository.findAll(pageable);
 
         // Then: the product list should not be empty and should contain the saved product
-        assertThat(products).isNotEmpty();
-        assertThat(products).contains(savedProduct);
-        assertThat(products).hasSize(1);
+        assertThat(products)
+                .isNotEmpty()
+                .contains(savedProduct)
+                .hasSize(1);
     }
 
     // JUnit Test for find by name containing ignore case with pagination operation
@@ -129,9 +131,10 @@ public class ProductRepositoryTest {
         Page<Product> products = productRepository.findByNameContainingIgnoreCase("Product", pageable);
 
         // Then: the product list should not be empty and should contain the saved product
-        assertThat(products).isNotEmpty();
-        assertThat(products).contains(savedProduct);
-        assertThat(products).hasSize(1);
+        assertThat(products)
+                .isNotEmpty()
+                .contains(savedProduct)
+                .hasSize(1);
     }
 
     // JUnit Test for find by status with pagination operation
@@ -145,9 +148,9 @@ public class ProductRepositoryTest {
         Page<Product> products = productRepository.findByStatus(Status.ACTIVE, pageable);
 
         // Then: the product list should not be empty and should contain the saved product
-        assertThat(products).isNotEmpty();
-        assertThat(products).contains(savedProduct);
-        assertThat(products).hasSize(1);
+        assertThat(products).isNotEmpty()
+                .contains(savedProduct)
+                .hasSize(1);
     }
 
     // JUnit Test for find by name containing ignore case and status with pagination operation
@@ -161,8 +164,8 @@ public class ProductRepositoryTest {
         Page<Product> products = productRepository.findByNameContainingIgnoreCaseAndStatus("Product", Status.ACTIVE, pageable);
 
         // Then: the product list should not be empty and should contain the saved product
-        assertThat(products).isNotEmpty();
-        assertThat(products).contains(savedProduct);
-        assertThat(products).hasSize(1);
+        assertThat(products).isNotEmpty()
+                .contains(savedProduct)
+                .hasSize(1);
     }
 }

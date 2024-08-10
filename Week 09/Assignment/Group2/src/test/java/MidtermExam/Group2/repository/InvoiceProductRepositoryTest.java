@@ -1,7 +1,6 @@
 package MidtermExam.Group2.repository;
 
 import MidtermExam.Group2.entity.*;
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +12,13 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class InvoiceProductRepositoryTest {
+class InvoiceProductRepositoryTest {
     @Autowired
     private InvoiceProductRepository invoiceProductRepository;
 
@@ -76,8 +74,9 @@ public class InvoiceProductRepositoryTest {
 
         // Then: the retrieved invoice product should be present and equal to the saved invoice product
         Optional<InvoiceProduct> foundInvoiceProduct = invoiceProductRepository.findById(new InvoiceProductId(invoiceProduct.getInvoice().getId(), invoiceProduct.getProduct().getId()));
-        assertThat(foundInvoiceProduct).isPresent();
-        assertThat(foundInvoiceProduct.get()).isEqualTo(savedInvoiceProduct);
+        assertThat(foundInvoiceProduct)
+                .isPresent()
+                .contains(savedInvoiceProduct);
     }
 
     // JUnit Test for find all invoice products operation
@@ -110,8 +109,9 @@ public class InvoiceProductRepositoryTest {
         List<InvoiceProduct> invoiceProducts = invoiceProductRepository.findAll();
 
         // Then: the invoice product list should not be empty and should contain 2 invoice products
-        assertThat(invoiceProducts).isNotEmpty();
-        assertThat(invoiceProducts.size()).isEqualTo(2);
+        assertThat(invoiceProducts)
+                .isNotEmpty()
+                .hasSize(2);
     }
 
     // JUnit Test for get invoice product by id operation
@@ -125,8 +125,9 @@ public class InvoiceProductRepositoryTest {
         Optional<InvoiceProduct> foundInvoiceProduct = invoiceProductRepository.findById(invoiceProductId);
 
         // Then: the retrieved invoice product should be present and equal to the saved invoice product
-        assertThat(foundInvoiceProduct).isPresent();
-        assertThat(foundInvoiceProduct.get()).isEqualTo(savedInvoiceProduct);
+        assertThat(foundInvoiceProduct)
+                .isPresent()
+                .contains(savedInvoiceProduct);
     }
 
     // JUnit Test for delete invoice product operation

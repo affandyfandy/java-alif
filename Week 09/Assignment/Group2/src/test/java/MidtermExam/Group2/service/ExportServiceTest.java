@@ -30,7 +30,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {ExportServiceImpl.class})
-public class ExportServiceTest {
+class ExportServiceTest {
     @Autowired
     private ExportServiceImpl exportService;
 

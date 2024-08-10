@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-public class CustomerRepositoryTest {
+class CustomerRepositoryTest {
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -40,14 +40,14 @@ public class CustomerRepositoryTest {
 
     // JUnit Test for save customer operation
     @Test
-    void givenCustomer_whenSaveCustomer_thenReturnSavedCustomer() {
-        // When: saving the customer and retrieving it by ID
+    void whenSaveCustomer_thenReturnSavedCustomer() {
+        // When: saving the customer
         Customer savedCustomer = customerRepository.save(customer);
-        Optional<Customer> foundCustomer = customerRepository.findById(savedCustomer.getId());
 
         // Then: the retrieved customer should be present and equal to the saved customer
-        assertThat(foundCustomer).isPresent();
-        assertThat(foundCustomer.get()).isEqualTo(savedCustomer);
+        assertThat(savedCustomer).isNotNull();
+        assertThat(savedCustomer.getId()).isNotNull();
+        assertThat(savedCustomer.getName()).isEqualTo(customer.getName());
     }
 
     // JUnit Test for get customer list operation
@@ -81,8 +81,9 @@ public class CustomerRepositoryTest {
         List<Customer> customerList = customerRepository.findAll();
 
         // Then: the customer list should not be empty and have a size of 2
-        assertThat(customerList).isNotEmpty();
-        assertThat(customerList.size()).isEqualTo(2);
+        assertThat(customerList)
+                .isNotEmpty()
+                .hasSize(2);
     }
 
     // JUnit Test for find customer by id operation
@@ -95,8 +96,9 @@ public class CustomerRepositoryTest {
         Optional<Customer> foundCustomer = customerRepository.findById(savedCustomer.getId());
 
         // Then: the retrieved customer should be present and equal to the saved customer
-        assertThat(foundCustomer).isPresent();
-        assertThat(foundCustomer.get()).isEqualTo(savedCustomer);
+        assertThat(foundCustomer)
+                .isPresent()
+                .contains(savedCustomer);
     }
 
     // JUnit Test for update customer operation
@@ -143,7 +145,8 @@ public class CustomerRepositoryTest {
         Optional<Customer> foundCustomer = customerRepository.findByName(savedCustomer.getName());
 
         // Then: the retrieved customer should be present and equal to the saved customer
-        assertThat(foundCustomer).isPresent();
-        assertThat(foundCustomer.get()).isEqualTo(savedCustomer);
+        assertThat(foundCustomer)
+                .isPresent()
+                .contains(savedCustomer);
     }
 }

@@ -51,17 +51,14 @@ public class CustomerController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> changeCustomerStatus(@PathVariable UUID id) {
+    public ResponseEntity<CustomerDTO> changeCustomerStatus(@PathVariable UUID id) {
         Optional<CustomerDTO> updatedCustomer = customerService.changeCustomerStatus(id);
-        if (updatedCustomer.isPresent()) {
-            return ResponseEntity.ok(updatedCustomer.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return updatedCustomer.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteCustomer(@PathVariable UUID id) {
+    public ResponseEntity<String> deleteCustomer(@PathVariable UUID id) {
         Optional<CustomerDTO> customer = customerService.getCustomerById(id);
 
         if (customer.isPresent()) {

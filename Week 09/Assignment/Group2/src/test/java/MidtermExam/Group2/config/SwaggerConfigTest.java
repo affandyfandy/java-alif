@@ -10,7 +10,7 @@ import org.springframework.context.ApplicationContext;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class SwaggerConfigTest {
+class SwaggerConfigTest {
     @Autowired
     private ApplicationContext applicationContext;
 

@@ -16,7 +16,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = ProductMapper.class)
-public class ProductMapperTest {
+class ProductMapperTest {
     @MockBean
     private ProductMapper productMapper;
 

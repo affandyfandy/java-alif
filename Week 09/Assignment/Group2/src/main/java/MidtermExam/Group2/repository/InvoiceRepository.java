@@ -2,10 +2,7 @@ package MidtermExam.Group2.repository;
 
 import MidtermExam.Group2.entity.Invoice;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.domain.Page;

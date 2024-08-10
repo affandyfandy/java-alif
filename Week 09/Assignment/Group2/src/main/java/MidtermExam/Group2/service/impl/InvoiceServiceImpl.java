@@ -6,7 +6,6 @@ import MidtermExam.Group2.dto.InvoiceDetailDTO;
 import MidtermExam.Group2.dto.InvoiceListDTO;
 import MidtermExam.Group2.entity.Invoice;
 import MidtermExam.Group2.entity.Customer;
-import MidtermExam.Group2.entity.Invoice;
 import MidtermExam.Group2.exception.InvoiceNotFoundException;
 import MidtermExam.Group2.mapper.InvoiceMapper;
 import MidtermExam.Group2.repository.CustomerRepository;
@@ -26,9 +25,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.LocalDateTime;
-import java.util.Optional;
-import java.util.UUID;
-
 @Service
 @Transactional
 public class InvoiceServiceImpl implements InvoiceService {
@@ -52,8 +48,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public InvoiceDTO getInvoiceById(UUID id) {
-        Invoice invoice = invoiceRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invoice not found"));
+        Invoice invoice = findInvoiceById(id);
         return invoiceMapper.toInvoicesDTO(invoice);
     }
 
@@ -89,8 +84,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public InvoiceDTO editInvoice(UUID id, InvoiceDTO invoiceDTO) {
-        Invoice invoice = invoiceRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invoice not found"));
+        Invoice invoice = findInvoiceById(id);
 
         // Throw exception if invoice is older than 10 minutes
         if (invoice.getCreatedTime().plusMinutes(10).isBefore(LocalDateTime.now())) {
@@ -113,11 +107,12 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public InvoiceDetailDTO getInvoiceDetail(UUID invoiceId) {
-        Optional<Invoice> invoiceOpt = invoiceRepository.findById(invoiceId);
-        if (invoiceOpt.isPresent()) {
-            return invoiceMapper.toInvoiceDetailDTO(invoiceOpt.get());
-        } else {
-            throw new InvoiceNotFoundException("Invoice not found");
-        }
+        Invoice invoice = findInvoiceById(invoiceId);
+        return invoiceMapper.toInvoiceDetailDTO(invoice);
+    }
+
+    private Invoice findInvoiceById(UUID id) {
+        return invoiceRepository.findById(id)
+                .orElseThrow(() -> new InvoiceNotFoundException("Invoice not found"));
     }
 }

@@ -45,16 +45,12 @@ public class Product {
 
     @PrePersist
     public void prePersist() {
-        if (createdTime == null) {
-            createdTime = LocalDateTime.now();
-        }
-        if (updatedTime == null) {
-            updatedTime = LocalDateTime.now();
-        }
+        this.createdTime = LocalDateTime.now();
+        this.updatedTime = LocalDateTime.now();
     }
 
     @PreUpdate
     public void preUpdate() {
-        updatedTime = LocalDateTime.now();
+        this.updatedTime = LocalDateTime.now();
     }
 }

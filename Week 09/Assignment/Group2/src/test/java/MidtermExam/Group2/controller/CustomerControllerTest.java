@@ -1,7 +1,6 @@
 package MidtermExam.Group2.controller;
 
 import MidtermExam.Group2.dto.CustomerDTO;
-import MidtermExam.Group2.mapper.CustomerMapper;
 import MidtermExam.Group2.service.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +24,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @WebMvcTest(controllers = CustomerController.class)
-public class CustomerControllerTest {
+class CustomerControllerTest {
 
     @Autowired
     private MockMvc mockMvc;

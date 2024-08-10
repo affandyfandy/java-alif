@@ -1,27 +1,20 @@
 package MidtermExam.Group2.exception;
 
-import MidtermExam.Group2.controller.CustomerController;
-import MidtermExam.Group2.repository.CustomerRepository;
-import MidtermExam.Group2.repository.InvoiceRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class GlobalExceptionHandlerTest {
+class GlobalExceptionHandlerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -45,7 +38,7 @@ public class GlobalExceptionHandlerTest {
     }
 
     @Test
-    public void whenIllegalArgumentException_thenReturnsBadRequest() throws Exception {
+    void whenIllegalArgumentException_thenReturnsBadRequest() throws Exception {
         mockMvc.perform(post("/api/v1/customers")  // Replace with your actual endpoint
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{ \"triggerException\": true }"))  // Adjust as necessary to trigger IllegalArgumentException
@@ -53,5 +46,28 @@ public class GlobalExceptionHandlerTest {
                 .andExpect(jsonPath("$.errors").exists())
                 .andExpect(jsonPath("$.errors").isArray())
                 .andExpect(jsonPath("$.errors.length()").value(3));
+    }
+
+    @Test
+    void whenRuntimeException_thenReturnsInternalServerError() throws Exception {
+        // Simulate endpoint that throws RuntimeException
+        mockMvc.perform(get("/api/v1/revenue/day?date=2024-07-252") // Adjust path to your actual endpoint
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("$.errors").exists())
+                .andExpect(jsonPath("$.errors").isArray())
+                .andExpect(jsonPath("$.errors.length()").value(1)); // Replace with your actual message
+    }
+
+    @Test
+    void whenInvoiceNotFoundException_thenReturnsNotFound() throws Exception {
+        // Simulate endpoint that throws InvoiceNotFoundException
+        mockMvc.perform(get("/api/v1/invoices/af2bccfe-55e9-44f7-8663-ee5a0573ce98") // Adjust path to your actual endpoint
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.errors").exists())
+                .andExpect(jsonPath("$.errors").isArray())
+                .andExpect(jsonPath("$.errors.length()").value(1))
+                .andExpect(jsonPath("$.errors[0]").value("Invoice not found")); // Replace with your actual message
     }
 }
