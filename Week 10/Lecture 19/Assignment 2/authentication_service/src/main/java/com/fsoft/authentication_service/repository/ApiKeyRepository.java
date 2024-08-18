@@ -1,6 +1,6 @@
-package com.fsoft.gateway.repository;
+package com.fsoft.authentication_service.repository;
 
-import com.fsoft.gateway.model.ApiKey;
+import com.fsoft.authentication_service.model.ApiKey;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ApiKeyRepository extends JpaRepository<ApiKey, Long> {

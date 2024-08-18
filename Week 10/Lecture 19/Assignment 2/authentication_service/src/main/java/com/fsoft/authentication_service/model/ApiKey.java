@@ -1,4 +1,4 @@
-package com.fsoft.gateway.model;
+package com.fsoft.authentication_service.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

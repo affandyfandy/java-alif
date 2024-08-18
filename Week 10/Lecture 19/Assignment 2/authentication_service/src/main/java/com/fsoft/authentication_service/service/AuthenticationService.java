@@ -1,6 +1,6 @@
-package com.fsoft.gateway.service;
+package com.fsoft.authentication_service.service;
 
-import com.fsoft.gateway.repository.ApiKeyRepository;
+import com.fsoft.authentication_service.repository.ApiKeyRepository;
 import org.springframework.stereotype.Service;
 
 @Service
