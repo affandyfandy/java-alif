@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+      service-url:
+        defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+    instance-id: ${spring.application.name}
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    inetutils:
+      preferred-networks: 127.0.0.1
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: invoice_application
+          uri: lb://invoice_application
+          predicates:
+            - Path=/api/v1/invoices/**
+        - id: product_application
+          uri: lb://product_application:8082
+          predicates:
+            - Path=/api/v1/products/**
+      default-filters:
+        - name: ApiKey
+
+logging:
+  level:
+    org:
+      springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
