@@ -1,0 +1,12 @@
+<app-header *ngIf="!isLoginPage"></app-header>
+<div class="container-fluid">
+  <div class="row mt-5">
+    <div class="col-md-2">
+      <app-menu *ngIf="!isLoginPage"></app-menu>
+    </div>
+    <div class="col-md-10" [ngClass]="{'col-md-12': isLoginPage}">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+<app-footer *ngIf="!isLoginPage"></app-footer>

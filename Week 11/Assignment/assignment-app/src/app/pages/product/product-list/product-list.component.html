@@ -1,0 +1,12 @@
+<ag-grid-angular
+  style="width: 100%; height: 500px;"
+  class="ag-theme-alpine"
+  [rowData]="products"
+  [columnDefs]="columnDefs"
+  [pagination]="true"
+  [paginationPageSize]="5"
+  [paginationPageSizeSelector]="paginationPageSizeSelector"
+  [sortingOrder]="['asc', 'desc']"
+  (rowClicked)="onRowClicked($event)"
+  (cellValueChanged)="onCellValueChanged($event)">
+</ag-grid-angular>
