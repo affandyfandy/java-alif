@@ -26,6 +26,6 @@ export class AppComponent {
   }
 
   get isLoginPage(): boolean {
-    return this.router.url === '/login';
+    return this.router.url.includes('login');
   }
 }

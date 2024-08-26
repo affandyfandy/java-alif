@@ -10,6 +10,8 @@ export interface RouteLink {
 }
 
 export const RouterConfig = {
-    LOGIN: { path: '', link: '/'},
-    
+    HOME: {path: 'home', link: '/home', title: 'Home Page'},
+    PRODUCT: {path: 'products', link: '/products', title: 'Product Page'},
+    AUTH: {path: 'auth', link: '/auth', title: 'Auth Page'},
+    NOT_FOUND: {path: '**', link: null, title: '404 Page'},
 }
