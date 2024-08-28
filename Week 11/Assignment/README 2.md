@@ -389,6 +389,8 @@ The product management component includes the `product list` and `product form` 
 
 ### Screenshots
 
-![Product Management](img/product-management.jpeg)
+![Product Management](img/product-management.png)
 
 ![Add Product](img/add-product.jpeg)
+
+![Search Product](img/search-product.png)

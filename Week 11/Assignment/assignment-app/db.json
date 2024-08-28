@@ -23,7 +23,7 @@
       "id": "3",
       "name": "Product C",
       "price": 120,
-      "status": false
+      "status": true
     },
     {
       "name": "Product D",
@@ -34,7 +34,7 @@
     {
       "name": "Product E",
       "price": 250,
-      "status": "false",
+      "status": false,
       "id": "5"
     },
     {

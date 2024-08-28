@@ -44,17 +44,28 @@ export class ProductListComponent implements OnInit {
 
   products: any[] = [];
   columnDefs: ColDef[] = [
-    { headerName: 'ID', field: 'id' },
-    { headerName: 'Name', field: 'name' },
-    { headerName: 'Price', field: 'price' },
+    { headerName: 'ID', field: 'id', sortable: true, filter: true },
+    { headerName: 'Name', field: 'name', sortable: true, filter: 'agTextColumnFilter', },
+    { headerName: 'Price', field: 'price', sortable: true, filter: 'agTextColumnFilter',  },
     { headerName: 'Status', 
       field: 'status',
       cellEditor: 'agSelectCellEditor',
       editable: true,
-    },
-    { headerName: 'Action', cellRenderer: EditButtonComponent }
+      cellEditorParams: {
+        values: ['Active', 'Inactive']
+      },
+      sortable: true,
+      filter: 'agTextColumnFilter'
+    }
   ];
+  
   paginationPageSizeSelector: number[] | boolean = [3, 5, 10];
+  defaultColDef: ColDef = {
+    flex: 1,
+    filter: true,
+    sortable: true,
+    floatingFilter: true
+  };
 
   constructor(private productService: ProductService){}
 
