@@ -513,8 +513,8 @@ The `getAll()` method sends a `GET` request to the product API to retrieve all p
 
 - POSTMAN Login Get Token
     ![postman](image/postman-login.png)
-- POSTMAN Get All Product
-    ![postman](image/postman-get-all-product.png)
+- POSTMAN Get All Product With Authorization
+    ![postman](image/postman-get-product.png)
 - POSTMAN Unauthorized POST Product
     ![postman](image/postman-post-product.png)
 
