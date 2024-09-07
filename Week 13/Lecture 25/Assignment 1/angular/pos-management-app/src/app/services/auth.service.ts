@@ -13,7 +13,7 @@ const baseUrl = 'http://localhost:3000/users';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class AuthService {
 
   private authApiUrl = 'http://localhost:8080/api/v1/auth';
   private tokenCookieName = 'jwt_token';

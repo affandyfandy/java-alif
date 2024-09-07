@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { Product } from '../models/product.model';
-import { LoginService } from './auth.service';
+import { AuthService } from './auth.service';
 
 const baseUrl = 'http://localhost:8080/api/v1/products';
 
@@ -10,7 +10,7 @@ const baseUrl = 'http://localhost:8080/api/v1/products';
   providedIn: 'root'
 })
 export class ProductService {
-  constructor(private http : HttpClient, private authService : LoginService) {}
+  constructor(private http : HttpClient, private authService : AuthService) {}
 
   // getAll(): Observable<Product[]> {
   //   return this.http.get<any>(baseUrl).pipe(

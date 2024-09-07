@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LoginService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -18,7 +18,7 @@ export class LoginComponent {
   loginSuccess: boolean | null = null;
   private loginSubscription: Subscription | null = null;
 
-  constructor(private loginService : LoginService, private router: Router) {
+  constructor(private loginService : AuthService, private router: Router) {
     console.log('LoginComponent constructor');
   }
 

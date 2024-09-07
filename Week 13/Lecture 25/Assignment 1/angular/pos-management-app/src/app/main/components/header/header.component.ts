@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { RouterConfig } from '../../../config/app.constants';
 
@@ -12,7 +12,7 @@ import { RouterConfig } from '../../../config/app.constants';
 export class HeaderComponent {
   username: string | null;
 
-  constructor(private loginService: LoginService, private router: Router) {
+  constructor(private loginService: AuthService, private router: Router) {
     this.username = this.capitalizeWords(this.loginService.getUsername() ?? 'Guest');
   }
 
