@@ -515,7 +515,9 @@ The `getAll()` method sends a `GET` request to the product API to retrieve all p
     ![postman](image/postman-login.png)
 - POSTMAN Get All Product With Authorization
     ![postman](image/postman-get-product.png)
-- POSTMAN Unauthorized POST Product
+- POSTMAN Unauthorized Get All Product Because No Authorization
+    ![postman](image/postman-unauth-get-product.png)
+- POSTMAN Unauthorized POST Product Because Pre Authorize Scope In Controller
     ![postman](image/postman-post-product.png)
 
 ### 2. Angular
