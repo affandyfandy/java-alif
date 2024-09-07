@@ -1,0 +1,25 @@
+  <div *ngIf="invoice">
+    <h5>Edit Invoice</h5>
+    <br>
+    <form>
+      <div class="form-group">
+        <label for="selectedProduct">Product</label>
+        <select id="selectedProduct" [(ngModel)]="selectedProductIndex" (ngModelChange)="onProductChange($event)" name="selectedProduct" class="form-control">
+          <option *ngFor="let product of invoice.products; let i = index" [ngValue]="i">
+            {{ product.productName }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group" *ngIf="selectedProductIndex !== null && invoice.products[selectedProductIndex]">
+        <label for="quantity">Quantity</label>
+        <input type="number" id="quantity" [(ngModel)]="invoice.products[selectedProductIndex].quantity" (ngModelChange)="onQuantityChange()" name="quantity" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="invoiceAmount">Total Invoice Amount</label>
+        <input type="text" id="invoiceAmount" [(ngModel)]="invoice.invoiceAmount" name="invoiceAmount" class="form-control" readonly />
+      </div>
+      <button class="btn-update" (click)="updateInvoice()">Update</button>
+      <button class="btn-delete-edit" (click)="deleteInvoice()">Delete</button>
+    </form>
+  </div>

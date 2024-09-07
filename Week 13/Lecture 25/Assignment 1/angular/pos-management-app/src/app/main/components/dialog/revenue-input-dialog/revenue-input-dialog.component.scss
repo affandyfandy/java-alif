@@ -1,0 +1,26 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Full height of the dialog */
+  padding: 20px;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 500px; /* Adjust width as needed */
+}
+
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* Ensure the buttons span the full width */
+  margin-top: 20px;
+}
+
+mat-form-field {
+  width: 100%; /* Ensure form fields take full width of the container */
+}

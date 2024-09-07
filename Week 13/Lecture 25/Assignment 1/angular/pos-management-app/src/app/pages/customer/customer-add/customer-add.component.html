@@ -1,0 +1,38 @@
+<mat-card>
+  <h5>Add Customer</h5>
+  <div class="content">
+    <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="name">Name:</label>
+        <br>
+        <input id="name" formControlName="name" type="text" class="form-control"/>
+      </div>
+
+      <div>
+        <label for="phoneNumber">Phone Number:</label>
+        <br>
+        <input id="phoneNumber" formControlName="phoneNumber" type="text" class="form-control"/>
+      </div>
+
+      <div>
+        <label for="status">Status:</label>
+        <br>
+        <select id="status" formControlName="status" class="option" class="form-control">
+          <option value="ACTIVE">ACTIVE</option>
+          <option value="INACTIVE">INACTIVE</option>
+        </select>
+      </div>
+
+      <div class="error-message" *ngIf="customerForm.get('phoneNumber')?.invalid && customerForm.get('phoneNumber')?.touched">
+        <small *ngIf="customerForm.get('phoneNumber')?.errors?.['pattern']">
+          *Phone number must start with +62 and 9 to 13 digits
+        </small>
+      </div>
+
+      <div class="btn">
+        <button class="btn-add" type="submit">Add Customer</button>
+        <button class="btn-cancel" type="button" (click)="onCancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</mat-card>

@@ -1,0 +1,25 @@
+<body>
+  <div class="invoice-container">
+    <h5>Invoice List</h5>
+    <button class="btn-add-list" (click)="addInvoice()">Add Invoice</button>
+    <button class="btn-add-excel" (click)="openExportExcelDialog()">Excel Report</button>
+    <button class="btn-add-revenue" (click)="openRevenueInputDialog()">Revenue</button>
+
+
+  </div>
+
+  <div class="invoice-list-container">
+    <ag-grid-angular
+      class="ag-theme-alpine"
+      style="width: 100%; height: 500px;"
+      [rowData]="rowData"
+      [columnDefs]="colDefs"
+      [defaultColDef]="defaultColDef"
+      (cellClicked)="onCellClicked($event)"
+      [pagination]="true"
+      [paginationPageSize]="paginationPageSize"
+      [paginationPageSizeSelector]="paginationPageSizeSelector">
+    </ag-grid-angular>
+  </div>
+
+</body>

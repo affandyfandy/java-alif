@@ -1,0 +1,44 @@
+<mat-card>
+  <h5>Add Invoice</h5>
+  <div class="content">
+    <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="customer_id">Customer:</label>
+        <br>
+        <select id="customer_id" formControlName="customer_id" class="form-control">
+          <option *ngFor="let customer of customers" [value]="customer.id">{{ customer.name }}</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="product_id">Products:</label>
+        <br>
+        <select id="product_id" (change)="onProductSelect($event)" class="form-control">
+          <option *ngFor="let product of products" [value]="product.id">{{ product.name }}</option>
+        </select>
+      </div>
+
+      <div *ngFor="let selectedProduct of selectedProducts.controls; let i = index">
+        <ng-container [formGroup]="asFormGroup(selectedProduct)">
+          <label>{{ getProductById(asFormGroup(selectedProduct).get('product_id')?.value)?.name }}</label>
+          <br>
+          <input formControlName="quantity" type="number" class="product-control" />
+          <br>
+          <input formControlName="amount" type="number" [attr.disabled]="true" class="product-control"/>
+          <button class="btn-remove" type="button" (click)="removeProduct(i)">Remove</button>
+        </ng-container>
+      </div>
+
+      <div>
+        <label for="invoice_amount">Invoice Amount:</label>
+        <br>
+        <input name="invoice_amount" id="invoice_amount" formControlName="invoice_amount" type="number" [attr.disabled]="true" class="form-control"/>
+      </div>
+
+      <div class="btn">
+        <button class="btn-add" type="submit">Add Invoice</button>
+        <button class="btn-cancel" type="button" (click)="onCancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</mat-card>

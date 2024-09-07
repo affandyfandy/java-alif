@@ -1,0 +1,32 @@
+<button class="btn-back" (click)="goBack()">Back</button>
+<br><br>
+<div class="invoice-container row">
+  <div class="invoice-detail col-7" *ngIf="invoice">
+    <h5>Invoice Details: {{ invoice.customer.name }}</h5>
+    <br>
+    <p><strong>Invoice ID:</strong> {{ invoice.invoiceId }}</p>
+    <p><strong>Customer ID:</strong> {{ invoice.customer.id }}</p>
+    <p><strong>Customer Name:</strong> {{ invoice.customer.name }}</p>
+    <p><strong>Invoice Amount:</strong> {{ invoice.invoiceAmount }}</p>
+    <p><strong>Invoice Date: </strong>{{ invoice.invoiceDate }}</p>
+  </div>
+
+  <div class="invoice-edit col-5">
+    <app-invoice-edit [invoice]="invoice" [productId]="selectedProductId" (invoiceUpdated)="onInvoiceUpdated($event)"></app-invoice-edit>
+  </div>
+
+  <div class="invoice-product col-12">
+    <h5>Product List</h5>
+    <ag-grid-angular
+      class="ag-theme-alpine"
+      style="width: 100%; height: 500px;"
+      [rowData]="rowData"
+      [columnDefs]="colDefs"
+      [defaultColDef]="defaultColDef"
+      (cellClicked)="onCellClicked($event)"
+      [pagination]="true"
+      [paginationPageSize]="paginationPageSize"
+      [paginationPageSizeSelector]="paginationPageSizeSelector">
+    </ag-grid-angular>
+  </div>
+</div>

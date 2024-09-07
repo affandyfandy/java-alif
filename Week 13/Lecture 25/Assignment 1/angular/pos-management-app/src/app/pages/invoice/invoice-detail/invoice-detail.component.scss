@@ -1,0 +1,26 @@
+p {
+  margin-bottom: 20px;
+}
+
+.invoice-container {
+  display: flex;
+  margin-bottom: 90px;
+  font-size: 16px;
+
+    .invoice-detail {
+      flex: 1;
+      margin-right: 20px;
+      margin-bottom: 90px;
+    }
+
+    .invoice-edit {
+      flex: 1;
+    }
+
+    .invoice-product {
+      margin-bottom: 100px;
+    }
+}
+
+
+

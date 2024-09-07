@@ -1,0 +1,31 @@
+<mat-card class="form-container">
+  <div class="form-content">
+    <h5 style="text-align: center;">Select Revenue Period</h5>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Date (YYYY-MM-DD)</mat-label>
+        <input matInput [(ngModel)]="selectedDate" placeholder="Enter date">
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Year</mat-label>
+        <input matInput type="number" [(ngModel)]="selectedYear" placeholder="Enter year">
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Month</mat-label>
+        <input matInput type="number" [(ngModel)]="selectedMonth" min="1" max="12" placeholder="Enter month">
+      </mat-form-field>
+    </div>
+
+    <div class="btn-group">
+      <button mat-button (click)="closeDialog()">Cancel</button>
+      <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+    </div>
+  </div>
+</mat-card>
