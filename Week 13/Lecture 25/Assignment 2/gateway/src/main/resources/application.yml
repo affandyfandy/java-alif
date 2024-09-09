@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: invoice-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/v1/invoices/**
+        - id: product-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/v1/products/**
+      default-filters:
+        - name: ApiKey
+
+logging:
+  level:
+    org:
+      springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
