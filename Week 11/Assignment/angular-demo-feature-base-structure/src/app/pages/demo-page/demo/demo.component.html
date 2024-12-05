@@ -1,0 +1,15 @@
+<h3>Building an attribute directive</h3>
+
+<p appHighlight>Highlight me!</p>
+
+<h3>Using a pipe</h3>
+
+<p>Today is {{ birthday | date:'fullDate' }}</p>
+
+<h3>Using a custom pipe</h3>
+
+<input type="text"
+        class="form-control"
+        placeholder="Phone Number"
+        [(ngModel)]="phoneNumber"/>
+<p>Phone number: {{phoneNumber | phone}}</p>
